@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: "Do you have a kids menu?",
-    a: "While we don't have a separate kids menu, many of our dishes are family-friendly. Our staff can recommend milder options that children typically enjoy."
+    a: "While we don&apos;t have a separate kids menu, many of our dishes are family-friendly. Our staff can recommend milder options that children typically enjoy."
   },
   {
     q: "What payment methods do you accept?",

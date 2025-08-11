@@ -53,7 +53,7 @@ const testimonials: Testimonial[] = [
       ku: "چێشتچی، پۆرتلاند"
     },
     text: {
-      en: "As a fellow chef, I'm incredibly impressed by the authenticity and skill displayed here. Every spice, every technique speaks to generations of Kurdish culinary tradition.",
+      en: "As a fellow chef, I&apos;m incredibly impressed by the authenticity and skill displayed here. Every spice, every technique speaks to generations of Kurdish culinary tradition.",
       ku: "وەک چێشتچییەک، زۆر سەرسام بووم لە ڕاستگۆیی و لێهاتوویی کە لێرە نیشان درا. هەر بۆنخۆشێک، هەر تەکنیکێک قسە لە نەوەکانی نەریتی چێشتی کوردی دەکات."
     },
     rating: 5,
