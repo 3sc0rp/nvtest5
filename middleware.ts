@@ -10,13 +10,23 @@ export default createMiddleware({
 
   // Locale detection strategy
   localeDetection: true,
+  
+  // Always redirect to default locale for root path
+  alternateLinks: true,
 });
 
 export const config = {
   // Match only internationalized pathnames
   matcher: [
+    // Enable a redirect to a matching locale at the root
     '/',
+
+    // Set a cookie to remember the previous locale for
+    // all requests that have a locale prefix
     '/(ku|en)/:path*',
-    '/((?!api|_next|_vercel|.*\\..*).*)'
+
+    // Enable redirects that add missing locales
+    // (e.g. `/pathnames` -> `/en/pathnames`)
+    '/((?!_next|api|.*\\..*).*)'
   ]
 };
