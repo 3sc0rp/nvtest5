@@ -145,6 +145,7 @@ export default async function RootLayout({
 }
 
 // Generate params for static generation
+export const dynamicParams = false;
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return [{ locale: 'en' }, { locale: 'ku' }];
 }
