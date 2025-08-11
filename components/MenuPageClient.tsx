@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState, useEffect } from 'react';
-import { useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed i18n import
+// Removed language toggle
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CategoryBadge } from './Badge';
@@ -41,8 +41,8 @@ interface MenuPageClientProps {
 }
 
 export default function MenuPageClient({ items, categories }: MenuPageClientProps) {
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
+  const locale = 'en';
+  const isRTL = false;
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
+// Removed i18n imports
 // Removed language toggle
 import menuData from '@/data/menu.json';
 
@@ -36,8 +36,8 @@ interface Dish {
 export default function DishCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
+  const locale = 'en';
+  const isRTL = false;
   // const t = useTranslations('menu'); // Unused for now
   
   const featuredDishes = (menuData.items as Dish[]).filter(item => item.featured);
@@ -96,7 +96,7 @@ export default function DishCarousel() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {locale === 'ku' ? 'خواردنە تایبەتەکانمان' : 'Our Featured Dishes'}
+            Our Featured Dishes
           </motion.h2>
           <motion.p
             className="font-body text-lg text-nv-olive max-w-2xl mx-auto"
@@ -105,10 +105,7 @@ export default function DishCarousel() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {locale === 'ku' 
-              ? 'هەر خواردنێک چیرۆکێکی تایبەتی هەیە لە نەریت و کولتووری کوردی'
-              : 'Each dish tells a story of Kurdish tradition and culinary heritage'
-            }
+            Each dish tells a story of Kurdish tradition and culinary heritage
           </motion.p>
         </div>
 

@@ -19,7 +19,7 @@ export default function Home() {
       <DishCarousel />
 
       {/* Culture Band with Embroidery Divider */}
-      <EmbroideryDivider showContent={true} />
+      <EmbroideryDivider title="Kurdish Culture in Every Flavor" />
 
       {/* Testimonials Grid */}
       <Testimonials />

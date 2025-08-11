@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed i18n import
+// Removed language toggle
 
 interface Testimonial {
   id: string;
@@ -135,8 +135,8 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Testimonials() {
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
+  const locale = 'en';
+  const isRTL = false;
 
   const containerVariants = {
     hidden: { opacity: 0 },

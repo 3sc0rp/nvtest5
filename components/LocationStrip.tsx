@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed language toggle
 
 export default function LocationStrip() {
   const locale = useLocale();

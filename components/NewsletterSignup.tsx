@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useTranslations, useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed language toggle
 
 // Zod schema for form validation
 const newsletterSchema = z.object({

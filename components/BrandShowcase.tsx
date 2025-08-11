@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed language toggle
 
 export default function BrandShowcase() {
   const t = useTranslations('hero');
-  const { isRTL } = useCurrentLocale();
+  const isRTL = false;
   
   return (
     <div className={`max-w-4xl mx-auto p-8 bg-nv-paper ${isRTL ? 'text-right' : 'text-left'}`}>

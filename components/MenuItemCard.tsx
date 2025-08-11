@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed i18n import
+// Removed language toggle
 import Badge, { DietaryBadge, SpiceBadge, CategoryBadge, TagBadge, PopularityBadge, PriceBadge } from './Badge';
 
 interface MenuItem {
@@ -51,8 +51,8 @@ export default function MenuItemCard({
 }: MenuItemCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
+  const locale = 'en';
+  const isRTL = false;
 
   const cardVariants = {
     default: "bg-white rounded-xl shadow-lg hover:shadow-xl",

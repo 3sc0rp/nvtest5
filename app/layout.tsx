@@ -60,9 +60,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({children}:{children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <head>
         {/* Resource hints for better performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
