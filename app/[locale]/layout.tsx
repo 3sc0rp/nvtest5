@@ -7,7 +7,6 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import { restaurantJsonLd } from "@/lib/seo";
-import { locales, localeConfig, type Locale } from "@/i18n/config";
 import "../../styles/globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -23,7 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://naturevillage.com'),
+  metadataBase: new URL('https://nvtest5.vercel.app'),
   title: "Nature Village - Kurdish Restaurant",
   description: "Authentic Kurdish cuisine in a warm, welcoming atmosphere. Fresh ingredients, traditional recipes, and genuine hospitality in the heart of the village.",
   keywords: ["Kurdish restaurant", "authentic cuisine", "traditional food", "Middle Eastern", "Mediterranean", "halal", "fresh ingredients", "family restaurant"],
@@ -31,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nature Village - Kurdish Restaurant",
     description: "Experience authentic Kurdish cuisine in a warm, welcoming atmosphere. Fresh ingredients, traditional recipes, and genuine hospitality.",
-    url: "https://naturevillage.com",
+    url: "https://nvtest5.vercel.app",
     siteName: "Nature Village Restaurant",
     images: [
       {
@@ -64,29 +63,19 @@ export const metadata: Metadata = {
   },
 };
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-  params: Promise<{
-    locale: string;
-  }>;
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return [{locale: 'en'}, {locale: 'ku'}];
 }
 
-export default async function RootLayout({
-  children,
-  params
-}: RootLayoutProps) {
-  const { locale } = await params;
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as Locale)) {
-    notFound();
-  }
-
-  // Providing all messages to the client side is the easiest way to get started
+export default async function LocaleLayout({
+  children, params: {locale}
+}: {children: React.ReactNode; params: {locale: 'en'|'ku'}}) {
   const messages = await getMessages();
-  const direction = localeConfig[locale as Locale]?.dir || 'ltr';
+  if (!['en','ku'].includes(locale)) notFound();
 
   return (
-    <html lang={locale} dir={direction}>
+    <html lang={locale} dir={locale === 'ku' ? 'rtl' : 'ltr'}>
       <head>
         {/* Resource hints for better performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -106,10 +95,8 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
         />
       </head>
-      <body
-        className={`${playfairDisplay.variable} ${inter.variable} antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
+      <body className={`${playfairDisplay.variable} ${inter.variable} antialiased`}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           <PerformanceOptimizer />
           
           {/* Skip to content link for keyboard navigation */}
@@ -142,10 +129,4 @@ export default async function RootLayout({
       </body>
     </html>
   );
-}
-
-// Generate params for static generation
-export const dynamicParams = false;
-export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'ku' }];
 }
