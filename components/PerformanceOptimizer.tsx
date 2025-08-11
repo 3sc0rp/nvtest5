@@ -31,7 +31,13 @@ export default function PerformanceOptimizer({
 
     // Preload critical images on hover intent
     const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const target = e.target;
+      
+      // Check if target is an HTML element and has the closest method
+      if (!target || !(target instanceof HTMLElement) || typeof target.closest !== 'function') {
+        return;
+      }
+      
       const link = target.closest('a[href]') as HTMLAnchorElement;
       
       if (link && criticalRoutes.some(route => link.href.includes(route))) {
