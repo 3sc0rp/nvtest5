@@ -1,0 +1,485 @@
+{
+  "items": [
+    {
+      "id": "kofta-zagros",
+      "name": {
+        "en": "Zagros Mountain Kofta",
+        "ku": "کوفتەی چیای زاگرۆس"
+      },
+      "description": {
+        "en": "Traditional Kurdish meatballs with aromatic spices, served with basmati rice and fresh herbs from the Zagros highlands.",
+        "ku": "کوفتەی نەریتی کوردی لەگەڵ بۆنخۆشی و چێشتنی تایبەت، لەگەڵ برنجی باسماتی و گیای تازەی چیاکانی زاگرۆس."
+      },
+      "price": 18.95,
+      "image": "/images/kofta-zagros.jpg",
+      "category": "main",
+      "tags": ["traditional", "popular", "chef-special"],
+      "spiceLevel": 2,
+      "popularity": 9.2,
+      "seasonal": false,
+      "vegetarian": false,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "25 mins",
+      "calories": 420,
+      "featured": true
+    },
+    {
+      "id": "dolma-village",
+      "name": {
+        "en": "Nature Village Dolma",
+        "ku": "دۆڵمەی گوندی سروشت"
+      },
+      "description": {
+        "en": "Hand-rolled grape leaves stuffed with seasoned rice, pine nuts, and fresh herbs, drizzled with pomegranate molasses.",
+        "ku": "گەڵای مێوی پێچراو بە دەست، پڕ لە برنجی چێشتکراو و گوێزی کوهی و گیای تازە، لەگەڵ دڵۆپەی هەناری."
+      },
+      "price": 14.95,
+      "image": "/images/dolma-village.jpg",
+      "category": "appetizer",
+      "tags": ["vegetarian", "healthy", "traditional"],
+      "spiceLevel": 1,
+      "popularity": 8.7,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "20 mins",
+      "calories": 280,
+      "featured": true
+    },
+    {
+      "id": "kurdish-kebab",
+      "name": {
+        "en": "Kurdish Fire Kebab",
+        "ku": "کەبابی ئاگری کوردی"
+      },
+      "description": {
+        "en": "Charcoal-grilled lamb skewers marinated in traditional Kurdish spices, served with grilled vegetables and lavash bread.",
+        "ku": "کەبابی بەرانی برژاو لەسەر خەڵووز، تێکەڵ بە بۆنخۆشی نەریتی کوردی، لەگەڵ سەوزەی برژاو و نانی لەڤاش."
+      },
+      "price": 24.95,
+      "image": "/images/kurdish-kebab.jpg",
+      "category": "main",
+      "tags": ["grilled", "signature", "protein-rich"],
+      "spiceLevel": 3,
+      "popularity": 9.5,
+      "seasonal": false,
+      "vegetarian": false,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "30 mins",
+      "calories": 520,
+      "featured": true
+    },
+    {
+      "id": "baklava-honey",
+      "name": {
+        "en": "Mountain Honey Baklava",
+        "ku": "باقڵەوای هەنگوینی چیایی"
+      },
+      "description": {
+        "en": "Delicate layers of phyllo pastry filled with chopped pistachios and walnuts, sweetened with pure mountain honey.",
+        "ku": "چەندین تەبەقەی نازکی خەمیری فیلۆ، پڕ لە پستە و گوێزی کوتراو، شیرین کراو بە هەنگوینی پاکی چیایی."
+      },
+      "price": 8.95,
+      "image": "/images/baklava-honey.jpg",
+      "category": "dessert",
+      "tags": ["sweet", "nuts", "traditional"],
+      "spiceLevel": 0,
+      "popularity": 8.9,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "15 mins",
+      "calories": 320,
+      "featured": true
+    },
+    {
+      "id": "kurdish-tea",
+      "name": {
+        "en": "Traditional Kurdish Tea",
+        "ku": "چایی نەریتی کوردی"
+      },
+      "description": {
+        "en": "Aromatic black tea blend served in traditional istikan glasses, accompanied by dates and Turkish delight.",
+        "ku": "تێکەڵەی چایی ڕەشی بۆنخۆش لە گڵاسی ئیستیکانی نەریتی، لەگەڵ خورما و لۆقوومی تورکی."
+      },
+      "price": 4.95,
+      "image": "/images/kurdish-tea.jpg",
+      "category": "beverage",
+      "tags": ["hot", "traditional", "caffeine"],
+      "spiceLevel": 0,
+      "popularity": 9.0,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": true,
+      "halal": true,
+      "prepTime": "5 mins",
+      "calories": 45,
+      "featured": true
+    },
+    {
+      "id": "saffron-rice",
+      "name": {
+        "en": "Saffron Paradise Rice",
+        "ku": "برنجی بەهەشتی زەعفەرانی"
+      },
+      "description": {
+        "en": "Fragrant basmati rice cooked with saffron, barberries, and almonds, a royal dish from Kurdish cuisine.",
+        "ku": "برنجی باسماتی بۆنخۆش کە لەگەڵ زەعفەران و زەرەشک و بادەم چێشت کراوە، خواردنێکی شاهانەی چێشتی کوردی."
+      },
+      "price": 12.95,
+      "image": "/images/saffron-rice.jpg",
+      "category": "side",
+      "tags": ["aromatic", "luxury", "colorful"],
+      "spiceLevel": 1,
+      "popularity": 8.3,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": true,
+      "halal": true,
+      "prepTime": "20 mins",
+      "calories": 240,
+      "featured": true
+    },
+    {
+      "id": "shepherd-stew",
+      "name": {
+        "en": "Kurdish Shepherd's Stew",
+        "ku": "خۆراکی شوانی کوردی"
+      },
+      "description": {
+        "en": "Hearty lamb and vegetable stew slow-cooked with Kurdish herbs and spices, served with traditional bread.",
+        "ku": "خۆراکی بەران و سەوزە بە هێواشی چێشت کراو لەگەڵ گیا و بۆنخۆشی کوردی، لەگەڵ نانی نەریتی."
+      },
+      "price": 21.95,
+      "image": "/images/shepherd-stew.jpg",
+      "category": "main",
+      "tags": ["comfort-food", "winter-special", "hearty"],
+      "spiceLevel": 2,
+      "popularity": 8.6,
+      "seasonal": true,
+      "vegetarian": false,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "45 mins",
+      "calories": 480,
+      "featured": false
+    },
+    {
+      "id": "vegan-kufta",
+      "name": {
+        "en": "Mountain Herb Vegan Kufta",
+        "ku": "کوفتەی گیایی کوردی"
+      },
+      "description": {
+        "en": "Plant-based kufta made with lentils, bulgur, and mountain herbs, served with tahini sauce and fresh salad.",
+        "ku": "کوفتەی گیایی دروست کراو لە نیسک و بورغول و گیای چیایی، لەگەڵ سۆسی تاهینی و زەڵاتەی تازە."
+      },
+      "price": 16.95,
+      "image": "/images/vegan-kufta.jpg",
+      "category": "main",
+      "tags": ["vegan", "healthy", "protein-rich"],
+      "spiceLevel": 2,
+      "popularity": 7.9,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": true,
+      "halal": true,
+      "prepTime": "25 mins",
+      "calories": 350,
+      "featured": false
+    },
+    {
+      "id": "pomegranate-salad",
+      "name": {
+        "en": "Kurdish Pomegranate Salad",
+        "ku": "زەڵاتەی هەناری کوردی"
+      },
+      "description": {
+        "en": "Fresh mixed greens with pomegranate seeds, walnuts, and Kurdish cheese, dressed with pomegranate molasses.",
+        "ku": "سەوزەی تێکەڵ لەگەڵ دانەی هەنار و گوێز و پەنیری کوردی، لەگەڵ دڵۆپەی هەناری."
+      },
+      "price": 13.95,
+      "image": "/images/pomegranate-salad.jpg",
+      "category": "salad",
+      "tags": ["fresh", "antioxidant", "light"],
+      "spiceLevel": 0,
+      "popularity": 8.1,
+      "seasonal": true,
+      "vegetarian": true,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "15 mins",
+      "calories": 180,
+      "featured": false
+    },
+    {
+      "id": "rosewater-dessert",
+      "name": {
+        "en": "Rosewater Muhallabia",
+        "ku": "مووهەڵەبیای گوڵاو"
+      },
+      "description": {
+        "en": "Silky smooth milk pudding infused with rosewater and topped with crushed pistachios and rose petals.",
+        "ku": "پودینگی شیری نەرم تێکەڵ بە ئاوی گوڵ و ڕازاوە بە پستەی کوتراو و گەڵای گوڵ."
+      },
+      "price": 7.95,
+      "image": "/images/rosewater-dessert.jpg",
+      "category": "dessert",
+      "tags": ["creamy", "floral", "elegant"],
+      "spiceLevel": 0,
+      "popularity": 8.4,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": false,
+      "halal": true,
+      "prepTime": "10 mins",
+      "calories": 220,
+      "featured": false
+    },
+    {
+      "id": "spicy-lentil-soup",
+      "name": {
+        "en": "Fiery Kurdish Lentil Soup",
+        "ku": "شۆربای نیسکی تیژی کوردی"
+      },
+      "description": {
+        "en": "Red lentil soup with Kurdish peppers, cumin, and fresh herbs, served with lemon and crusty bread.",
+        "ku": "شۆربای نیسکی سوور لەگەڵ بیبەری کوردی و زیرە و گیای تازە، لەگەڵ لیمۆ و نان."
+      },
+      "price": 9.95,
+      "image": "/images/spicy-lentil-soup.jpg",
+      "category": "soup",
+      "tags": ["spicy", "warming", "healthy"],
+      "spiceLevel": 3,
+      "popularity": 8.2,
+      "seasonal": true,
+      "vegetarian": true,
+      "vegan": true,
+      "halal": true,
+      "prepTime": "20 mins",
+      "calories": 160,
+      "featured": false
+    },
+    {
+      "id": "kurdish-coffee",
+      "name": {
+        "en": "Traditional Kurdish Coffee",
+        "ku": "قاوەی نەریتی کوردی"
+      },
+      "description": {
+        "en": "Strong, aromatic coffee brewed with cardamom and served with traditional sweets and dried fruits.",
+        "ku": "قاوەی بەهێز و بۆنخۆش چێشت کراو لەگەڵ هەیل و خەرێکی نەریتی و میوەی وشک."
+      },
+      "price": 5.95,
+      "image": "/images/kurdish-coffee.jpg",
+      "category": "beverage",
+      "tags": ["strong", "aromatic", "traditional"],
+      "spiceLevel": 1,
+      "popularity": 8.8,
+      "seasonal": false,
+      "vegetarian": true,
+      "vegan": true,
+      "halal": true,
+      "prepTime": "10 mins",
+      "calories": 25,
+      "featured": false
+    }
+  ],
+  "categories": [
+    {
+      "id": "appetizer",
+      "name": {
+        "en": "Appetizers",
+        "ku": "پێشخوان"
+      },
+      "description": {
+        "en": "Start your Kurdish culinary journey",
+        "ku": "دەستپێکی گەشتی چێشتی کوردی"
+      }
+    },
+    {
+      "id": "soup",
+      "name": {
+        "en": "Soups",
+        "ku": "شۆربا"
+      },
+      "description": {
+        "en": "Warming soups from Kurdish tradition",
+        "ku": "شۆربای گەرمکەرەوەی نەریتی کوردی"
+      }
+    },
+    {
+      "id": "salad",
+      "name": {
+        "en": "Salads",
+        "ku": "زەڵاتە"
+      },
+      "description": {
+        "en": "Fresh and vibrant Kurdish salads",
+        "ku": "زەڵاتەی تازە و ڕەنگاوڕەنگی کوردی"
+      }
+    },
+    {
+      "id": "main",
+      "name": {
+        "en": "Main Courses",
+        "ku": "خواردنە سەرەکییەکان"
+      },
+      "description": {
+        "en": "Hearty dishes from the Kurdish kitchen",
+        "ku": "خواردنی تێر لە چێشتخانەی کوردی"
+      }
+    },
+    {
+      "id": "side",
+      "name": {
+        "en": "Side Dishes",
+        "ku": "خواردنە لاوەکییەکان"
+      },
+      "description": {
+        "en": "Perfect accompaniments to your meal",
+        "ku": "هاوبەشی تەواوکەر بۆ خواردنەکەت"
+      }
+    },
+    {
+      "id": "dessert",
+      "name": {
+        "en": "Desserts",
+        "ku": "شیرینی"
+      },
+      "description": {
+        "en": "Sweet endings with Kurdish flavors",
+        "ku": "کۆتایی شیرین بە تامی کوردی"
+      }
+    },
+    {
+      "id": "beverage",
+      "name": {
+        "en": "Beverages",
+        "ku": "خواردنەوە"
+      },
+      "description": {
+        "en": "Traditional and refreshing drinks",
+        "ku": "خواردنەوەی نەریتی و فێنک"
+      }
+    }
+  ],
+  "tags": {
+    "traditional": {
+      "en": "Traditional",
+      "ku": "نەریتی"
+    },
+    "popular": {
+      "en": "Popular",
+      "ku": "بەناوبانگ"
+    },
+    "chef-special": {
+      "en": "Chef's Special",
+      "ku": "تایبەتی چێشتچی"
+    },
+    "vegetarian": {
+      "en": "Vegetarian",
+      "ku": "گیاخۆر"
+    },
+    "vegan": {
+      "en": "Vegan",
+      "ku": "ڕاستە گیاخۆر"
+    },
+    "healthy": {
+      "en": "Healthy",
+      "ku": "تەندروست"
+    },
+    "grilled": {
+      "en": "Grilled",
+      "ku": "برژاو"
+    },
+    "signature": {
+      "en": "Signature",
+      "ku": "واژۆکراو"
+    },
+    "protein-rich": {
+      "en": "Protein Rich",
+      "ku": "دەوڵەمەند بە پرۆتین"
+    },
+    "sweet": {
+      "en": "Sweet",
+      "ku": "شیرین"
+    },
+    "nuts": {
+      "en": "Contains Nuts",
+      "ku": "گوێزی تێدایە"
+    },
+    "hot": {
+      "en": "Hot",
+      "ku": "گەرم"
+    },
+    "caffeine": {
+      "en": "Contains Caffeine",
+      "ku": "کافێینی تێدایە"
+    },
+    "aromatic": {
+      "en": "Aromatic",
+      "ku": "بۆنخۆش"
+    },
+    "luxury": {
+      "en": "Luxury",
+      "ku": "لوکس"
+    },
+    "colorful": {
+      "en": "Colorful",
+      "ku": "ڕەنگاوڕەنگ"
+    },
+    "comfort-food": {
+      "en": "Comfort Food",
+      "ku": "خواردنی ئارامکەرەوە"
+    },
+    "winter-special": {
+      "en": "Winter Special",
+      "ku": "تایبەتی زستان"
+    },
+    "hearty": {
+      "en": "Hearty",
+      "ku": "تێر"
+    },
+    "fresh": {
+      "en": "Fresh",
+      "ku": "تازە"
+    },
+    "antioxidant": {
+      "en": "Antioxidant",
+      "ku": "دژە ئۆکسیدان"
+    },
+    "light": {
+      "en": "Light",
+      "ku": "سووک"
+    },
+    "creamy": {
+      "en": "Creamy",
+      "ku": "کرێمی"
+    },
+    "floral": {
+      "en": "Floral",
+      "ku": "گوڵاوی"
+    },
+    "elegant": {
+      "en": "Elegant",
+      "ku": "جوان"
+    },
+    "spicy": {
+      "en": "Spicy",
+      "ku": "تیژ"
+    },
+    "warming": {
+      "en": "Warming",
+      "ku": "گەرمکەرەوە"
+    },
+    "strong": {
+      "en": "Strong",
+      "ku": "بەهێز"
+    }
+  }
+}

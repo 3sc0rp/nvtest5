@@ -1,0 +1,62 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FBF7ED;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#D97706;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B4532A;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="rayGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D97706;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Central sun -->
+  <circle cx="150" cy="150" r="50" fill="url(#sunGradient)"/>
+  
+  <!-- Long rays -->
+  <line x1="150" y1="10" x2="150" y2="80" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="150" y1="220" x2="150" y2="290" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="10" y1="150" x2="80" y2="150" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="220" y1="150" x2="290" y2="150" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Diagonal long rays -->
+  <line x1="53" y1="53" x2="103" y2="103" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="197" y1="197" x2="247" y2="247" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="247" y1="53" x2="197" y2="103" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <line x1="103" y1="197" x2="53" y2="247" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Medium rays -->
+  <line x1="150" y1="30" x2="150" y2="90" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="150" y1="210" x2="150" y2="270" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="150" x2="90" y2="150" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="210" y1="150" x2="270" y2="150" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Diagonal medium rays -->
+  <line x1="73" y1="73" x2="113" y2="113" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="187" y1="187" x2="227" y2="227" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="227" y1="73" x2="187" y2="113" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="113" y1="187" x2="73" y2="227" stroke="#B4532A" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Short decorative rays -->
+  <line x1="150" y1="50" x2="150" y2="95" stroke="#556B2F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="150" y1="205" x2="150" y2="250" stroke="#556B2F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="150" x2="95" y2="150" stroke="#556B2F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="205" y1="150" x2="250" y2="150" stroke="#556B2F" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Additional angled rays -->
+  <line x1="120" y1="40" x2="135" y2="100" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="180" y1="40" x2="165" y2="100" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="120" y1="260" x2="135" y2="200" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="180" y1="260" x2="165" y2="200" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  
+  <line x1="40" y1="120" x2="100" y2="135" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="40" y1="180" x2="100" y2="165" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="260" y1="120" x2="200" y2="135" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="260" y1="180" x2="200" y2="165" stroke="#D97706" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Central sun face -->
+  <circle cx="130" cy="130" r="4" fill="#0F1A14"/>
+  <circle cx="170" cy="130" r="4" fill="#0F1A14"/>
+  <path d="M130 170 Q150 185, 170 170" stroke="#0F1A14" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

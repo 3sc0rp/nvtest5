@@ -1,0 +1,65 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="floralPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="2" fill="#D97706" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Main corner flourish -->
+  <path d="M10 10 Q50 10, 50 50 Q50 90, 90 90 Q130 90, 130 130 Q130 170, 170 170" 
+        stroke="#B4532A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Large flower at corner -->
+  <g transform="translate(15, 15)">
+    <!-- Petals -->
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#D97706" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#D97706" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#D97706" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#D97706" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#B4532A" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#B4532A" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#B4532A" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="20" fill="#B4532A" transform="rotate(315)"/>
+    <!-- Center -->
+    <circle cx="0" cy="0" r="8" fill="#556B2F"/>
+    <circle cx="0" cy="0" r="4" fill="#E8D8B5"/>
+  </g>
+  
+  <!-- Medium flowers along the curve -->
+  <g transform="translate(60, 60)">
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(300)"/>
+    <circle cx="0" cy="0" r="5" fill="#556B2F"/>
+  </g>
+  
+  <g transform="translate(110, 110)">
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#D97706" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-8" rx="4" ry="12" fill="#B4532A" transform="rotate(300)"/>
+    <circle cx="0" cy="0" r="5" fill="#556B2F"/>
+  </g>
+  
+  <!-- Small accent flowers -->
+  <g transform="translate(160, 160)">
+    <ellipse cx="0" cy="-5" rx="2" ry="8" fill="#D97706" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-5" rx="2" ry="8" fill="#D97706" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-5" rx="2" ry="8" fill="#B4532A" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-5" rx="2" ry="8" fill="#B4532A" transform="rotate(135)"/>
+    <circle cx="0" cy="0" r="3" fill="#556B2F"/>
+  </g>
+  
+  <!-- Leaves -->
+  <ellipse cx="35" cy="25" rx="3" ry="12" fill="#556B2F" transform="rotate(30 35 25)"/>
+  <ellipse cx="25" cy="35" rx="3" ry="12" fill="#556B2F" transform="rotate(60 25 35)"/>
+  <ellipse cx="85" cy="75" rx="3" ry="12" fill="#556B2F" transform="rotate(45 85 75)"/>
+  <ellipse cx="75" cy="85" rx="3" ry="12" fill="#556B2F" transform="rotate(75 75 85)"/>
+  <ellipse cx="135" cy="125" rx="3" ry="12" fill="#556B2F" transform="rotate(60 135 125)"/>
+  <ellipse cx="125" cy="135" rx="3" ry="12" fill="#556B2F" transform="rotate(90 125 135)"/>
+</svg>

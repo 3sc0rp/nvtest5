@@ -1,0 +1,90 @@
+<svg width="400" height="80" viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Repeating pomegranate pattern -->
+  
+  <!-- First pomegranate -->
+  <g transform="translate(40, 40)">
+    <!-- Pomegranate body -->
+    <circle cx="0" cy="0" r="25" fill="#B4532A"/>
+    <circle cx="0" cy="0" r="20" fill="#D97706"/>
+    
+    <!-- Crown at top -->
+    <polygon points="-8,-20 -4,-30 0,-25 4,-30 8,-20" fill="#556B2F"/>
+    
+    <!-- Seeds pattern -->
+    <circle cx="-8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="-10" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="8" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+    <circle cx="8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+  </g>
+  
+  <!-- Connecting vine -->
+  <path d="M65 40 Q85 30, 105 40 Q125 50, 135 40" stroke="#556B2F" stroke-width="3" fill="none"/>
+  
+  <!-- Vine leaves -->
+  <ellipse cx="80" cy="35" rx="4" ry="8" fill="#556B2F" transform="rotate(30 80 35)"/>
+  <ellipse cx="110" cy="45" rx="4" ry="8" fill="#556B2F" transform="rotate(-30 110 45)"/>
+  
+  <!-- Second pomegranate -->
+  <g transform="translate(160, 40)">
+    <!-- Pomegranate body -->
+    <circle cx="0" cy="0" r="25" fill="#B4532A"/>
+    <circle cx="0" cy="0" r="20" fill="#D97706"/>
+    
+    <!-- Crown at top -->
+    <polygon points="-8,-20 -4,-30 0,-25 4,-30 8,-20" fill="#556B2F"/>
+    
+    <!-- Seeds pattern -->
+    <circle cx="-8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="-10" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="8" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+    <circle cx="8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+  </g>
+  
+  <!-- Connecting vine -->
+  <path d="M185 40 Q205 30, 225 40 Q245 50, 255 40" stroke="#556B2F" stroke-width="3" fill="none"/>
+  
+  <!-- Vine leaves -->
+  <ellipse cx="200" cy="35" rx="4" ry="8" fill="#556B2F" transform="rotate(30 200 35)"/>
+  <ellipse cx="230" cy="45" rx="4" ry="8" fill="#556B2F" transform="rotate(-30 230 45)"/>
+  
+  <!-- Third pomegranate -->
+  <g transform="translate(280, 40)">
+    <!-- Pomegranate body -->
+    <circle cx="0" cy="0" r="25" fill="#B4532A"/>
+    <circle cx="0" cy="0" r="20" fill="#D97706"/>
+    
+    <!-- Crown at top -->
+    <polygon points="-8,-20 -4,-30 0,-25 4,-30 8,-20" fill="#556B2F"/>
+    
+    <!-- Seeds pattern -->
+    <circle cx="-8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="8" cy="-5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="-10" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="5" cy="5" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="0" cy="8" r="2" fill="#FBF7ED" opacity="0.9"/>
+    <circle cx="-8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+    <circle cx="8" cy="0" r="1.5" fill="#FBF7ED" opacity="0.8"/>
+  </g>
+  
+  <!-- Connecting vine -->
+  <path d="M305 40 Q325 30, 345 40 Q365 50, 375 40" stroke="#556B2F" stroke-width="3" fill="none"/>
+  
+  <!-- Vine leaves -->
+  <ellipse cx="320" cy="35" rx="4" ry="8" fill="#556B2F" transform="rotate(30 320 35)"/>
+  <ellipse cx="350" cy="45" rx="4" ry="8" fill="#556B2F" transform="rotate(-30 350 45)"/>
+  
+  <!-- Small decorative elements -->
+  <circle cx="15" cy="20" r="3" fill="#D97706" opacity="0.6"/>
+  <circle cx="385" cy="60" r="3" fill="#D97706" opacity="0.6"/>
+  <circle cx="25" cy="60" r="2" fill="#B4532A" opacity="0.5"/>
+  <circle cx="375" cy="20" r="2" fill="#B4532A" opacity="0.5"/>
+</svg>
