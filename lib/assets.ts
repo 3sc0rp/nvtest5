@@ -15,7 +15,7 @@ export const IMAGES = {
 export const PATTERNS = {
   // Traditional Kurdish-inspired patterns
   floralCorner: '/patterns/floral-corner.svg',
-  pomegranate: '/patterns/pomegranate-border.svg',
+  pomegranateBorder: '/patterns/pomegranate-border.svg',
   sunRays: '/patterns/sun-rays.svg',
 } as const;
 
@@ -63,7 +63,7 @@ export const ASSET_METADATA = {
       usage: 'Section dividers, card corners, decorative elements',
       dimensions: '200x200',
     },
-    pomegranate: {
+    pomegranateBorder: {
       name: 'Pomegranate Border',
       description: 'Repeating pomegranate pattern representing abundance',
       usage: 'Borders, dividers, menu headers',

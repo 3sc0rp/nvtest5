@@ -1,27 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
-// Removed language toggle
 
 export default function LocationStrip() {
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
-  const t = useTranslations('contact');
-  const scheduleT = useTranslations('schedule');
 
   const businessHours = [
     {
-      days: scheduleT('monday_thursday'),
-      hours: scheduleT('hours_weekday')
+      days: 'Monday - Thursday',
+      hours: '11:00 AM - 10:00 PM'
     },
     {
-      days: scheduleT('friday_saturday'),
-      hours: scheduleT('hours_weekend')
+      days: 'Friday - Saturday',
+      hours: '11:00 AM - 11:00 PM'
     },
     {
-      days: scheduleT('sunday'),
-      hours: scheduleT('hours_sunday')
+      days: 'Sunday',
+      hours: '12:00 PM - 9:00 PM'
     }
   ];
 
@@ -54,14 +48,14 @@ export default function LocationStrip() {
           
           {/* Location Info */}
           <motion.div
-            className={`text-center lg:text-left ${isRTL ? 'lg:text-right' : ''}`}
-            initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
+            className="text-center lg:text-left"
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             <h3 className="font-heading text-2xl md:text-3xl font-bold text-nv-saffron mb-6">
-              {locale === 'ku' ? 'سەردانمان بکەن' : 'Visit Us'}
+              Visit Us
             </h3>
             
             <div className="space-y-4">
@@ -70,12 +64,12 @@ export default function LocationStrip() {
                 <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center mt-0.5">
                   <span className="text-nv-saffron text-lg">📍</span>
                 </div>
-                <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
+                <div className="text-left">
                   <p className="font-body text-nv-sand font-semibold">
-                    {t('address_line1')}
+                    123 Kurdish Heritage Street
                   </p>
                   <p className="font-body text-nv-sand/80 text-sm">
-                    {t('address_line2')}
+                    Nature Village District, City Center
                   </p>
                 </div>
               </div>
@@ -86,10 +80,10 @@ export default function LocationStrip() {
                   <span className="text-nv-saffron text-lg">📞</span>
                 </div>
                 <a 
-                  href={`tel:${t('phone').replace(/[^\d+]/g, '')}`}
+                  href="tel:+1-555-123-4567"
                   className="font-body text-nv-sand hover:text-nv-saffron transition-colors duration-200"
                 >
-                  {t('phone')}
+                  +1 (555) 123-4567
                 </a>
               </div>
 
@@ -99,10 +93,10 @@ export default function LocationStrip() {
                   <span className="text-nv-saffron text-lg">✉️</span>
                 </div>
                 <a 
-                  href={`mailto:${t('email')}`}
+                  href="mailto:info@naturevillage.com"
                   className="font-body text-nv-sand hover:text-nv-saffron transition-colors duration-200"
                 >
-                  {t('email')}
+                  info@naturevillage.com
                 </a>
               </div>
 
@@ -117,7 +111,7 @@ export default function LocationStrip() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <span>🗺️</span>
-                  <span>{locale === 'ku' ? 'نەخشە' : 'Get Directions'}</span>
+                  <span>Get Directions</span>
                 </motion.a>
               </div>
             </div>
@@ -132,7 +126,7 @@ export default function LocationStrip() {
             viewport={{ once: true }}
           >
             <h3 className="font-heading text-2xl md:text-3xl font-bold text-nv-saffron mb-6">
-              {locale === 'ku' ? 'کاتەکانی کارکردن' : 'Hours'}
+              Hours
             </h3>
 
             {/* Current Status */}
@@ -143,10 +137,7 @@ export default function LocationStrip() {
             }`}>
               <div className={`w-2 h-2 rounded-full ${openStatus ? 'bg-green-400' : 'bg-red-400'}`} />
               <span className="font-body font-semibold text-sm">
-                {openStatus 
-                  ? (locale === 'ku' ? 'ئێستا کراوەیە' : 'Open Now')
-                  : (locale === 'ku' ? 'ئێستا داخراوە' : 'Closed Now')
-                }
+                {openStatus ? 'Open Now' : 'Closed Now'}
               </span>
             </div>
 
@@ -171,10 +162,7 @@ export default function LocationStrip() {
             {/* Special Notice */}
             <div className="mt-6 p-3 bg-nv-terracotta/20 rounded-lg">
               <p className="font-body text-nv-sand text-xs">
-                {locale === 'ku' 
-                  ? 'بۆ پشوودان و ڕۆژە تایبەتەکان، تکایە پێشتر پەیوەندی بکەن'
-                  : 'Call ahead for holiday hours and special events'
-                }
+                Call ahead for holiday hours and special events
               </p>
             </div>
           </motion.div>
@@ -182,7 +170,7 @@ export default function LocationStrip() {
           {/* Map Placeholder */}
           <motion.div
             className="lg:col-span-1"
-            initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
@@ -193,10 +181,10 @@ export default function LocationStrip() {
                 <div className="text-center">
                   <div className="text-6xl mb-4">🗺️</div>
                   <h4 className="font-heading text-lg font-semibold text-nv-saffron mb-2">
-                    {locale === 'ku' ? 'نەخشەی ئینتەراکتیڤ' : 'Interactive Map'}
+                    Interactive Map
                   </h4>
                   <p className="font-body text-nv-sand text-sm">
-                    {locale === 'ku' ? 'کلیک بکە بۆ کردنەوە' : 'Click to open'}
+                    Click to open
                   </p>
                 </div>
               </div>
@@ -239,7 +227,7 @@ export default function LocationStrip() {
               <button
                 className="absolute inset-0 hover:bg-nv-saffron/5 transition-colors duration-200"
                 onClick={() => window.open('https://maps.google.com', '_blank')}
-                aria-label={locale === 'ku' ? 'نەخشە بکەرەوە' : 'Open map'}
+                aria-label="Open map"
               />
             </div>
 
@@ -251,7 +239,7 @@ export default function LocationStrip() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span>🚗</span>
-                <span>{locale === 'ku' ? 'ئۆتۆمبێل' : 'Parking'}</span>
+                <span>Parking</span>
               </motion.button>
 
               <motion.button
@@ -260,7 +248,7 @@ export default function LocationStrip() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span>🚌</span>
-                <span>{locale === 'ku' ? 'گواستنەوە' : 'Transit'}</span>
+                <span>Transit</span>
               </motion.button>
 
               <motion.button
@@ -269,7 +257,7 @@ export default function LocationStrip() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span>♿</span>
-                <span>{locale === 'ku' ? 'دەستڕاگەیشتن' : 'Accessible'}</span>
+                <span>Accessible</span>
               </motion.button>
             </div>
           </motion.div>
@@ -287,25 +275,25 @@ export default function LocationStrip() {
             <div className="flex items-center space-x-2">
               <span className="text-nv-saffron">🅿️</span>
               <span className="font-body text-nv-sand text-sm">
-                {locale === 'ku' ? 'پارکینگی خۆڕایی' : 'Free Parking'}
+                Free Parking
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-nv-saffron">📶</span>
               <span className="font-body text-nv-sand text-sm">
-                {locale === 'ku' ? 'وای-فای خۆڕایی' : 'Free WiFi'}
+                Free WiFi
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-nv-saffron">♿</span>
               <span className="font-body text-nv-sand text-sm">
-                {locale === 'ku' ? 'دەستڕاگەیشتن' : 'Wheelchair Accessible'}
+                Wheelchair Accessible
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-nv-saffron">👨‍👩‍👧‍👦</span>
               <span className="font-body text-nv-sand text-sm">
-                {locale === 'ku' ? 'خێزان-دۆست' : 'Family Friendly'}
+                Family Friendly
               </span>
             </div>
           </div>

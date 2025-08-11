@@ -3,11 +3,10 @@ module.exports = {
     collect: {
       // URLs to audit
       url: [
-        'http://localhost:3000/en',
-        'http://localhost:3000/en/menu',
-        'http://localhost:3000/en/order',
-        'http://localhost:3000/en/contact',
-        'http://localhost:3000/ku',
+        'http://localhost:3000/',
+        'http://localhost:3000/menu',
+        'http://localhost:3000/order',
+        'http://localhost:3000/contact',
       ],
       // Number of runs per URL for more stable results
       numberOfRuns: 3,
@@ -96,9 +95,9 @@ module.exports = {
   desktop: {
     collect: {
       url: [
-        'http://localhost:3000/en',
-        'http://localhost:3000/en/menu',
-        'http://localhost:3000/en/order',
+        'http://localhost:3000/',
+        'http://localhost:3000/menu',
+        'http://localhost:3000/order',
       ],
       numberOfRuns: 2,
       settings: {

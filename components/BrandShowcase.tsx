@@ -1,21 +1,18 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-// Removed language toggle
+// English-only showcase
 
 export default function BrandShowcase() {
-  const t = useTranslations('hero');
-  const isRTL = false;
   
   return (
-    <div className={`max-w-4xl mx-auto p-8 bg-nv-paper ${isRTL ? 'text-right' : 'text-left'}`}>
+    <div className={`max-w-4xl mx-auto p-8 bg-nv-paper text-left`}>
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="font-heading text-5xl font-bold text-nv-ink mb-4">
-          {t('welcome')}
+          Welcome to Nature Village
         </h1>
         <p className="font-body text-xl text-nv-olive max-w-2xl mx-auto">
-          {t('subtitle')}
+          Authentic Kurdish flavors with modern hospitality
         </p>
       </div>
 
@@ -100,10 +97,10 @@ export default function BrandShowcase() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button className="bg-nv-terracotta hover:bg-nv-terracotta/90 text-white font-body font-semibold px-6 py-3 rounded-lg transition-colors">
-              {t('cta_primary')}
+              Reserve a Table
             </button>
             <button className="bg-nv-olive hover:bg-nv-olive/90 text-white font-body font-semibold px-6 py-3 rounded-lg transition-colors">
-              {t('cta_secondary')}
+              View Menu
             </button>
           </div>
         </div>

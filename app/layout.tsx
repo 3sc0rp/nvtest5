@@ -1,116 +1,205 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
-import PerformanceOptimizer from "@/components/PerformanceOptimizer";
-import { restaurantJsonLd } from "@/lib/seo";
-import "../styles/globals.css";
+import type { Metadata, Viewport } from 'next';
+import { Cormorant_Garamond, Inter } from 'next/font/google';
+import '../styles/globals.css';
+import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
+import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
+// Font configurations
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-heading',
+  display: 'swap',
+  preload: true,
 });
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+  preload: true,
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#B4532A',
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nvtest5.vercel.app'),
-  title: "Nature Village - Kurdish Restaurant",
-  description: "Authentic Kurdish cuisine in a warm, welcoming atmosphere. Fresh ingredients, traditional recipes, and genuine hospitality in the heart of the village.",
-  keywords: ["Kurdish restaurant", "authentic cuisine", "traditional food", "Middle Eastern", "Mediterranean", "halal", "fresh ingredients", "family restaurant"],
-  authors: [{ name: "Nature Village Restaurant" }],
+  metadataBase: new URL('https://naturevillage.com'),
+  title: {
+    default: 'Nature Village - Authentic Kurdish Cuisine | Traditional Flavors from the Zagros',
+    template: '%s | Nature Village Kurdish Restaurant'
+  },
+  description: 'Experience authentic Kurdish cuisine at Nature Village. Traditional recipes, fire-grilled meats, and Kurdish hospitality in the heart of the city. Fresh ingredients from the Zagros Mountains.',
+  keywords: [
+    'Kurdish restaurant',
+    'authentic Kurdish food',
+    'Zagros mountains',
+    'halal restaurant',
+    'traditional cuisine',
+    'kebab',
+    'dolma',
+    'baklava',
+    'Middle Eastern food',
+    'fire grilled',
+    'vegetarian options'
+  ],
+  authors: [{ name: 'Nature Village Restaurant' }],
+  creator: 'Nature Village',
+  publisher: 'Nature Village Restaurant',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "Nature Village - Kurdish Restaurant",
-    description: "Experience authentic Kurdish cuisine in a warm, welcoming atmosphere. Fresh ingredients, traditional recipes, and genuine hospitality.",
-    url: "https://nvtest5.vercel.app",
-    siteName: "Nature Village Restaurant",
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://naturevillage.com',
+    siteName: 'Nature Village Kurdish Restaurant',
+    title: 'Nature Village - Authentic Kurdish Cuisine',
+    description: 'Traditional Kurdish flavors from the Zagros Mountains. Fire-grilled meats, fresh herbs, and family recipes passed down for generations.',
     images: [
       {
-        url: "/images/hero-mountains.jpg",
-        width: 1920,
-        height: 1080,
-        alt: "Nature Village Kurdish Restaurant",
-      },
+        url: '/images/hero-mountains.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Nature Village Kurdish Restaurant - Zagros Mountains landscape with traditional Kurdish patterns',
+        type: 'image/jpeg',
+      }
     ],
-    locale: "en_US",
-    type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Nature Village - Kurdish Restaurant",
-    description: "Experience authentic Kurdish cuisine in a warm, welcoming atmosphere.",
-    images: ["/images/hero-mountains.jpg"],
-    creator: "@NatureVillageKRD",
+    card: 'summary_large_image',
+    title: 'Nature Village - Authentic Kurdish Cuisine',
+    description: 'Traditional Kurdish flavors from the Zagros Mountains',
+    images: ['/images/hero-mountains.jpg'],
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
+  verification: {
+    // Add verification codes when available
+    // google: 'your-google-site-verification',
+    // yandex: 'your-yandex-verification',
+    // yahoo: 'your-yahoo-verification',
+  },
+  category: 'restaurant',
+  classification: 'business',
+  referrer: 'origin-when-cross-origin',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" dir="ltr">
+    <html 
+      lang="en" 
+      dir="ltr" 
+      className={`${cormorant.variable} ${inter.variable}`}
+    >
       <head>
-        {/* Resource hints for better performance */}
+        {/* Preconnect to font origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://api.vercel.app" />
         
-        {/* Critical resource preloads */}
-        <link 
-          rel="preload" 
-          href="/images/hero-mountains.jpg" 
-          as="image"
-          type="image/jpeg"
+        {/* Preload critical fonts */}
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+          as="style"
         />
         
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
-        />
+        {/* DNS prefetch for performance */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
-      <body className={`${playfairDisplay.variable} ${inter.variable} antialiased`}>
-        <PerformanceOptimizer />
-        
-        {/* Skip to content link for keyboard navigation */}
-        <a 
-          href="#main-content" 
-          className="skip-link"
-          aria-label="Skip to main content"
-        >
+      <body className="font-body text-nv-night bg-nv-paper antialiased">
+        {/* Skip to content link for accessibility */}
+        <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        
-        <div className="min-h-screen flex flex-col">
-          {/* Navigation */}
-          <NavBar />
-          
-          {/* Main Content */}
-          <main 
-            id="main-content" 
-            className="flex-1 pt-16 md:pt-20"
-            role="main"
-            aria-label="Main content"
-          >
-            {children}
-          </main>
-          
-          {/* Footer */}
-          <Footer />
-        </div>
+
+        {/* Performance optimization component */}
+        <PerformanceOptimizer />
+
+        {/* Navigation */}
+        <NavBar />
+
+        {/* Main content */}
+        <main id="main-content" className="min-h-screen">
+          {children}
+        </main>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Restaurant',
+              name: 'Nature Village',
+              description: 'Authentic Kurdish restaurant featuring traditional recipes and fire-grilled specialties from the Zagros Mountains.',
+              url: 'https://naturevillage.com',
+              telephone: '+1-555-123-4567',
+              email: 'info@naturevillage.com',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '123 Village Street',
+                addressLocality: 'City',
+                addressRegion: 'State',
+                postalCode: '12345',
+                addressCountry: 'US'
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: '37.7749',
+                longitude: '-122.4194'
+              },
+              openingHours: [
+                'Mo-Th 11:00-22:00',
+                'Fr-Sa 11:00-23:00',
+                'Su 12:00-21:00'
+              ],
+              priceRange: '$$',
+              servesCuisine: ['Kurdish', 'Middle Eastern', 'Mediterranean'],
+              paymentAccepted: ['Cash', 'Credit Card', 'Debit Card'],
+              currenciesAccepted: 'USD',
+              hasMenu: 'https://naturevillage.com/menu',
+              acceptsReservations: true,
+              image: 'https://naturevillage.com/images/hero-mountains.jpg',
+              logo: 'https://naturevillage.com/favicon.ico',
+              sameAs: [
+                // Add social media URLs when available
+                // 'https://facebook.com/naturevillage',
+                // 'https://instagram.com/naturevillage',
+                // 'https://twitter.com/naturevillage'
+              ]
+            })
+          }}
+        />
       </body>
     </html>
   );

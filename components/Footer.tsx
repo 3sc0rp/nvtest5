@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
 import { getPatternPath } from '@/lib/assets';
 import Button, { buttonVariants } from './Button';
 
@@ -11,7 +10,6 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [subscribeMessage, setSubscribeMessage] = useState('');
-  const locale = useLocale();
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,14 +28,13 @@ export default function Footer() {
     { days: 'Sunday', hours: '12:00 PM - 9:00 PM' },
   ];
 
-  const base = `/${locale}`;
   const quickLinks = [
-    { href: `${base}/menu`, label: 'Our Menu' },
-    { href: `${base}/reservations`, label: 'Make Reservation' },
-    { href: `${base}/order`, label: 'Order Online' },
-    { href: `${base}/about`, label: 'About Us' },
-    { href: `${base}/gallery`, label: 'Gallery' },
-    { href: `${base}/contact`, label: 'Contact' },
+    { href: `/menu`, label: 'Our Menu' },
+    { href: `/reservations`, label: 'Make Reservation' },
+    { href: `/order`, label: 'Order Online' },
+    { href: `/about`, label: 'About Us' },
+    { href: `/gallery`, label: 'Gallery' },
+    { href: `/contact`, label: 'Contact' },
   ];
 
   const socialLinks = [
@@ -54,7 +51,7 @@ export default function Footer() {
       </div>
 
       <div className="relative">
-        <Image src={getPatternPath('pomegranate')} alt="" width={400} height={80} className="w-full h-6 object-cover opacity-30" />
+        <Image src={getPatternPath('pomegranateBorder')} alt="" width={400} height={80} className="w-full h-6 object-cover opacity-30" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -159,9 +156,9 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="font-body text-sm text-nv-sand">© {new Date().getFullYear()} Nature Village Restaurant. All rights reserved.</div>
             <div className="flex flex-wrap gap-4">
-              <Link href={`${base}/privacy`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Privacy Policy</Link>
-              <Link href={`${base}/terms`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Terms of Service</Link>
-              <Link href={`${base}/accessibility`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Accessibility</Link>
+              <Link href={`/privacy`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Privacy Policy</Link>
+              <Link href={`/terms`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Terms of Service</Link>
+              <Link href={`/accessibility`} className="font-body text-sm text-nv-sand hover:text-nv-saffron">Accessibility</Link>
             </div>
           </div>
         </div>

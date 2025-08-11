@@ -11,7 +11,7 @@
         "ku": "کوفتەی نەریتی کوردی لەگەڵ بۆنخۆشی و چێشتنی تایبەت، لەگەڵ برنجی باسماتی و گیای تازەی چیاکانی زاگرۆس."
       },
       "price": 18.95,
-      "image": "/images/kofta-zagros.jpg",
+      "image": "/images/hero-mountains.jpg",
       "category": "main",
       "tags": ["traditional", "popular", "chef-special"],
       "spiceLevel": 2,
@@ -35,7 +35,7 @@
         "ku": "گەڵای مێوی پێچراو بە دەست، پڕ لە برنجی چێشتکراو و گوێزی کوهی و گیای تازە، لەگەڵ دڵۆپەی هەناری."
       },
       "price": 14.95,
-      "image": "/images/dolma-village.jpg",
+      "image": "/images/interior-booths.jpg",
       "category": "appetizer",
       "tags": ["vegetarian", "healthy", "traditional"],
       "spiceLevel": 1,
@@ -59,7 +59,7 @@
         "ku": "کەبابی بەرانی برژاو لەسەر خەڵووز، تێکەڵ بە بۆنخۆشی نەریتی کوردی، لەگەڵ سەوزەی برژاو و نانی لەڤاش."
       },
       "price": 24.95,
-      "image": "/images/kurdish-kebab.jpg",
+      "image": "/images/portrait-kurdish-woman.jpg",
       "category": "main",
       "tags": ["grilled", "signature", "protein-rich"],
       "spiceLevel": 3,
@@ -83,7 +83,7 @@
         "ku": "چەندین تەبەقەی نازکی خەمیری فیلۆ، پڕ لە پستە و گوێزی کوتراو، شیرین کراو بە هەنگوینی پاکی چیایی."
       },
       "price": 8.95,
-      "image": "/images/baklava-honey.jpg",
+      "image": "/images/hero-mountains.jpg",
       "category": "dessert",
       "tags": ["sweet", "nuts", "traditional"],
       "spiceLevel": 0,
@@ -107,7 +107,7 @@
         "ku": "تێکەڵەی چایی ڕەشی بۆنخۆش لە گڵاسی ئیستیکانی نەریتی، لەگەڵ خورما و لۆقوومی تورکی."
       },
       "price": 4.95,
-      "image": "/images/kurdish-tea.jpg",
+      "image": "/images/interior-booths.jpg",
       "category": "beverage",
       "tags": ["hot", "traditional", "caffeine"],
       "spiceLevel": 0,
@@ -131,7 +131,7 @@
         "ku": "برنجی باسماتی بۆنخۆش کە لەگەڵ زەعفەران و زەرەشک و بادەم چێشت کراوە، خواردنێکی شاهانەی چێشتی کوردی."
       },
       "price": 12.95,
-      "image": "/images/saffron-rice.jpg",
+      "image": "/images/portrait-kurdish-woman.jpg",
       "category": "side",
       "tags": ["aromatic", "luxury", "colorful"],
       "spiceLevel": 1,
@@ -155,7 +155,7 @@
         "ku": "خۆراکی بەران و سەوزە بە هێواشی چێشت کراو لەگەڵ گیا و بۆنخۆشی کوردی، لەگەڵ نانی نەریتی."
       },
       "price": 21.95,
-      "image": "/images/shepherd-stew.jpg",
+      "image": "/images/hero-mountains.jpg",
       "category": "main",
       "tags": ["comfort-food", "winter-special", "hearty"],
       "spiceLevel": 2,
@@ -179,7 +179,7 @@
         "ku": "کوفتەی گیایی دروست کراو لە نیسک و بورغول و گیای چیایی، لەگەڵ سۆسی تاهینی و زەڵاتەی تازە."
       },
       "price": 16.95,
-      "image": "/images/vegan-kufta.jpg",
+      "image": "/images/interior-booths.jpg",
       "category": "main",
       "tags": ["vegan", "healthy", "protein-rich"],
       "spiceLevel": 2,
@@ -203,7 +203,7 @@
         "ku": "سەوزەی تێکەڵ لەگەڵ دانەی هەنار و گوێز و پەنیری کوردی، لەگەڵ دڵۆپەی هەناری."
       },
       "price": 13.95,
-      "image": "/images/pomegranate-salad.jpg",
+      "image": "/images/portrait-kurdish-woman.jpg",
       "category": "salad",
       "tags": ["fresh", "antioxidant", "light"],
       "spiceLevel": 0,
@@ -227,7 +227,7 @@
         "ku": "پودینگی شیری نەرم تێکەڵ بە ئاوی گوڵ و ڕازاوە بە پستەی کوتراو و گەڵای گوڵ."
       },
       "price": 7.95,
-      "image": "/images/rosewater-dessert.jpg",
+      "image": "/images/hero-mountains.jpg",
       "category": "dessert",
       "tags": ["creamy", "floral", "elegant"],
       "spiceLevel": 0,
@@ -251,7 +251,7 @@
         "ku": "شۆربای نیسکی سوور لەگەڵ بیبەری کوردی و زیرە و گیای تازە، لەگەڵ لیمۆ و نان."
       },
       "price": 9.95,
-      "image": "/images/spicy-lentil-soup.jpg",
+      "image": "/images/interior-booths.jpg",
       "category": "soup",
       "tags": ["spicy", "warming", "healthy"],
       "spiceLevel": 3,
@@ -275,7 +275,7 @@
         "ku": "قاوەی بەهێز و بۆنخۆش چێشت کراو لەگەڵ هەیل و خەرێکی نەریتی و میوەی وشک."
       },
       "price": 5.95,
-      "image": "/images/kurdish-coffee.jpg",
+      "image": "/images/portrait-kurdish-woman.jpg",
       "category": "beverage",
       "tags": ["strong", "aromatic", "traditional"],
       "spiceLevel": 1,

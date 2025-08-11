@@ -30,16 +30,21 @@ export const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'as'>,
     VariantProps<typeof buttonVariants> {
+  as?: React.ElementType;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   loading?: boolean;
   loadingText?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
+    as: Component = 'button',
     className, 
     variant, 
     size, 
@@ -56,10 +61,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const isDisabled = disabled || loading;
     
     return (
-      <button
+      <Component
         ref={ref}
         className={clsx(buttonVariants({ variant, size, fullWidth }), className)}
-        disabled={isDisabled}
+        disabled={Component === 'button' ? isDisabled : undefined}
         aria-label={ariaLabel || (loading ? loadingText : undefined)}
         aria-disabled={isDisabled}
         {...props}
@@ -96,7 +101,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
           </>
         )}
-      </button>
+      </Component>
     );
   }
 );

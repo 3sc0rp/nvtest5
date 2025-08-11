@@ -1,20 +1,17 @@
 'use client';
 
 import { useMemo, useState, useEffect } from 'react';
-// Removed i18n import
-// Removed language toggle
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CategoryBadge } from './Badge';
 import MenuItemCard from './MenuItemCard';
 import { recommendByPrefs, trackView, type MenuItem as RecMenuItem } from '@/lib/recommend';
-
-interface LocalizedText { en: string; ku: string }
+import clsx from 'clsx';
 
 interface MenuItem {
   id: string;
-  name: LocalizedText;
-  description: LocalizedText;
+  name: { en: string; ku: string };
+  description: { en: string; ku: string };
   price: number;
   image: string;
   category: string;
@@ -32,7 +29,7 @@ interface MenuItem {
 
 interface Category {
   id: string;
-  name: LocalizedText;
+  name: { en: string; ku: string };
 }
 
 interface MenuPageClientProps {
@@ -41,195 +38,355 @@ interface MenuPageClientProps {
 }
 
 export default function MenuPageClient({ items, categories }: MenuPageClientProps) {
-  const locale = 'en';
-  const isRTL = false;
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [showPopular, setShowPopular] = useState(false);
+  const [showSeasonal, setShowSeasonal] = useState(false);
+  const [showVegetarian, setShowVegetarian] = useState(false);
+  const [sortBy, setSortBy] = useState<'name' | 'price' | 'popularity'>('popularity');
 
-  // Read initial state from URL
-  const initialCategory = searchParams.get('category') ?? 'all';
-  const initialQuery = searchParams.get('q') ?? '';
-  const initialPopular = searchParams.get('popular') === '1';
-  const initialSeasonal = searchParams.get('seasonal') === '1';
-  const initialVeg = searchParams.get('veg') === '1';
-
-  const [category, setCategory] = useState<string>(initialCategory);
-  const [query, setQuery] = useState<string>(initialQuery);
-  const [popularOnly, setPopularOnly] = useState<boolean>(initialPopular);
-  const [seasonalOnly, setSeasonalOnly] = useState<boolean>(initialSeasonal);
-  const [vegOnly, setVegOnly] = useState<boolean>(initialVeg);
-
-  // Sync state->URL without full reload
+  // Load filters from URL
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (category && category !== 'all') params.set('category', category);
-    if (query.trim().length > 0) params.set('q', query.trim());
-    if (popularOnly) params.set('popular', '1');
-    if (seasonalOnly) params.set('seasonal', '1');
-    if (vegOnly) params.set('veg', '1');
+    const category = searchParams.get('category') || 'all';
+    const search = searchParams.get('search') || '';
+    const popular = searchParams.get('popular') === 'true';
+    const seasonal = searchParams.get('seasonal') === 'true';
+    const vegetarian = searchParams.get('vegetarian') === 'true';
+    const sort = searchParams.get('sort') as 'name' | 'price' | 'popularity' || 'popularity';
 
-    const qs = params.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [category, query, popularOnly, seasonalOnly, vegOnly, pathname, router]);
+    setSelectedCategory(category);
+    setSearchTerm(search);
+    setShowPopular(popular);
+    setShowSeasonal(seasonal);
+    setShowVegetarian(vegetarian);
+    setSortBy(sort);
+  }, [searchParams]);
 
-  // Recompute filtered items
+  // Update URL when filters change
+  const updateURL = (updates: Record<string, string | boolean>) => {
+    const params = new URLSearchParams(searchParams);
+    
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === '' || value === false || value === 'all') {
+        params.delete(key);
+      } else {
+        params.set(key, String(value));
+      }
+    });
+
+    const newURL = `${pathname}?${params.toString()}`;
+    router.replace(newURL, { scroll: false });
+  };
+
+  // Filtered and sorted items
   const filteredItems = useMemo(() => {
-    const q = query.trim().toLowerCase();
-
-    return items.filter((item) => {
+    const filtered = items.filter((item) => {
       // Category filter
-      if (category !== 'all' && item.category !== category) return false;
+      if (selectedCategory !== 'all' && selectedCategory !== 'vegetarian') {
+        if (item.category !== selectedCategory) return false;
+      }
+      
+      // Special vegetarian category
+      if (selectedCategory === 'vegetarian' && !item.vegetarian) return false;
 
-      // Text search across name and description in current locale and English as fallback
-      if (q.length > 0) {
-        const nameText = (item.name[locale as 'en' | 'ku'] || item.name.en || '').toLowerCase();
-        const descText = (item.description[locale as 'en' | 'ku'] || item.description.en || '').toLowerCase();
-        if (!nameText.includes(q) && !descText.includes(q)) return false;
+      // Search filter
+      if (searchTerm) {
+        const searchLower = searchTerm.toLowerCase();
+        if (
+          !item.name.en.toLowerCase().includes(searchLower) &&
+          !item.description.en.toLowerCase().includes(searchLower) &&
+          !item.tags.some(tag => tag.toLowerCase().includes(searchLower))
+        ) {
+          return false;
+        }
       }
 
-      // Popular toggle: popularity >= 8.5 or has 'popular' tag
-      if (popularOnly && !(item.popularity >= 8.5 || item.tags.includes('popular'))) return false;
-
-      // Seasonal toggle
-      if (seasonalOnly && !item.seasonal) return false;
-
-      // Vegetarian toggle: include vegetarian OR vegan items when enabled
-      if (vegOnly && !(item.vegetarian || item.vegan)) return false;
+      // Toggle filters
+      if (showPopular && item.popularity < 8) return false;
+      if (showSeasonal && !item.seasonal) return false;
+      if (showVegetarian && !item.vegetarian) return false;
 
       return true;
     });
-  }, [items, category, query, popularOnly, seasonalOnly, vegOnly, locale]);
 
-  // Track views for recommendations whenever the filtered set changes meaningfully
+    // Sort items
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.en.localeCompare(b.name.en);
+        case 'price':
+          return a.price - b.price;
+        case 'popularity':
+        default:
+          return b.popularity - a.popularity;
+      }
+    });
+
+    return filtered;
+  }, [items, selectedCategory, searchTerm, showPopular, showSeasonal, showVegetarian, sortBy]);
+
+  // Track category views
   useEffect(() => {
-    // Track up to top 3 currently visible items to bias prefs
-    filteredItems.slice(0, 3).forEach((it) => trackView(it as unknown as RecMenuItem));
-  }, [filteredItems]);
+    if (selectedCategory !== 'all') {
+      // Track category interest for recommendations
+      const categoryItems = items.filter(item => 
+        selectedCategory === 'vegetarian' ? item.vegetarian : item.category === selectedCategory
+      );
+      
+      categoryItems.slice(0, 3).forEach(item => {
+        trackView({
+          id: item.id,
+          category: item.category,
+          tags: item.tags,
+          price: item.price,
+          popularity: item.popularity
+        } as RecMenuItem);
+      });
+    }
+  }, [selectedCategory, items]);
 
-  // Compute recommendations respecting current filters and time-of-day
-  const recommended = useMemo(() => {
-    // Exclude items not matching veg or category filters to keep rail relevant
-    const basePool = items.filter((item) => {
-      if (vegOnly && !(item.vegan || item.vegetarian)) return false;
-      if (category !== 'all' && item.category !== category) return false;
-      return true;
-    });
-    const recs = recommendByPrefs(basePool as unknown as RecMenuItem[], 10);
-    // Remove anything already in top of current filtered list to diversify
-    const usedIds = new Set(filteredItems.slice(0, 6).map((i) => i.id));
-    return recs.filter((r) => !usedIds.has(r.id)).slice(0, 6) as unknown as MenuItem[];
-  }, [items, filteredItems, category, vegOnly]);
+  // Get recommended items
+  const recommendedItems = useMemo(() => {
+    const recItems: RecMenuItem[] = items.map(item => ({
+      id: item.id,
+      category: item.category,
+      tags: item.tags,
+      price: item.price,
+      popularity: item.popularity
+    } as RecMenuItem));
+    
+    return recommendByPrefs(recItems, new Date().getHours())
+      .slice(0, 4)
+      .map(rec => items.find(item => item.id === rec.id))
+      .filter(Boolean) as MenuItem[];
+  }, [items]);
 
-  // UI helpers
-  const categoryList = useMemo(() => [{ id: 'all', name: { en: 'All', ku: 'هەموو' } }, ...categories], [categories]);
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    updateURL({ category: categoryId });
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    updateURL({ search: value });
+  };
+
+  const handleToggleChange = (toggle: string, value: boolean) => {
+    const updates: Record<string, boolean> = {};
+    updates[toggle] = value;
+    
+    if (toggle === 'popular') setShowPopular(value);
+    if (toggle === 'seasonal') setShowSeasonal(value);
+    if (toggle === 'vegetarian') setShowVegetarian(value);
+    
+    updateURL(updates);
+  };
+
+  const handleSortChange = (sort: 'name' | 'price' | 'popularity') => {
+    setSortBy(sort);
+    updateURL({ sort });
+  };
 
   return (
     <div className="space-y-8">
-      {/* Heading */}
-      <div className={`text-center ${isRTL ? 'text-right' : 'text-left'}`}>
-        <h1 className="font-heading text-4xl font-bold text-nv-ink">
-          {locale === 'ku' ? 'مینو' : 'Menu'}
-        </h1>
-        <p className="font-body text-nv-olive mt-2">
-          {locale === 'ku' ? 'خواردنەکان بەپێی پۆل، گەرم، و هەڵبژاردەکان بڵاو بکەرەوە' : 'Browse dishes by category, popularity, and preferences'}
-        </p>
-      </div>
+      {/* Recommended Section - Time-based */}
+      {recommendedItems.length > 0 && !searchTerm && selectedCategory === 'all' && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-nv-gold/10 to-nv-saffron/10 rounded-2xl p-6 border border-nv-gold/20"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-nv-gold/20 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-nv-gold" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+            <h2 className="font-heading text-xl font-bold text-nv-night">
+              Recommended for You
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {recommendedItems.map((item, index) => (
+              <div key={item.id} className="bg-nv-paper rounded-xl p-4 border border-nv-sand/50">
+                <h3 className="font-heading font-semibold text-nv-night mb-1 text-sm line-clamp-1">
+                  {item.name.en}
+                </h3>
+                <p className="text-xs text-nv-olive line-clamp-2 mb-2">
+                  {item.description.en}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="price-badge text-xs">
+                    ${item.price.toFixed(2)}
+                  </span>
+                  <span className="text-xs text-nv-olive">
+                    {item.prepTime}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
-      {/* Controls */}
-      <div className="bg-white rounded-xl p-4 md:p-6 shadow-md space-y-4">
-        {/* Category Tabs */}
-        <div className={`flex flex-wrap gap-2 ${isRTL ? 'justify-end' : ''}`}>
-          {categoryList.map((cat) => (
-            <CategoryBadge
-              key={cat.id}
-              category={cat.id === 'all' ? 'side' : cat.id} // use neutral variant for "All"
-              onClick={() => setCategory(cat.id)}
-              interactive
-              className={`${category === cat.id ? 'ring-2 ring-nv-terracotta' : ''}`}
-              data-testid="category-filter"
+      {/* Search and Filters */}
+      <div className="space-y-6">
+        {/* Search Bar */}
+        <div className="relative max-w-md mx-auto">
+          <input
+            type="text"
+            placeholder="Search dishes, ingredients, or flavors..."
+            value={searchTerm}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 bg-surface border border-nv-sand rounded-xl focus:outline-none focus:ring-2 focus:ring-nv-terracotta focus:border-transparent transition-all"
+          />
+          <svg
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-nv-olive/50"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        {/* Category Chips */}
+        <div className="flex flex-wrap justify-center gap-3">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => handleCategoryChange(category.id)}
+              className={clsx(
+                'px-6 py-3 rounded-xl font-medium transition-all duration-200',
+                selectedCategory === category.id
+                  ? 'bg-nv-terracotta text-nv-paper shadow-md'
+                  : 'bg-surface border border-nv-sand hover:border-nv-terracotta/30 text-nv-night hover:bg-nv-terracotta/5'
+              )}
             >
-              {cat.name[locale as 'en' | 'ku']}
-            </CategoryBadge>
+              {category.name.en}
+            </button>
           ))}
         </div>
 
-        {/* Search + Toggles */}
-        <div className={`flex flex-col md:flex-row gap-3 items-stretch ${isRTL ? 'md:flex-row-reverse' : ''}`}>
-          <div className="flex-1">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={locale === 'ku' ? 'گەڕان...' : 'Search...'}
-              className="w-full px-4 py-3 border-2 rounded-lg font-body border-nv-sand focus:border-nv-terracotta focus:outline-none"
-            />
+        {/* Filter Toggles and Sort */}
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-surface rounded-xl border border-nv-sand">
+          <div className="flex flex-wrap gap-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showPopular}
+                onChange={(e) => handleToggleChange('popular', e.target.checked)}
+                className="rounded border-nv-sand focus:ring-nv-terracotta"
+              />
+              <span className="text-sm font-medium text-nv-night">Popular</span>
+            </label>
+            
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showSeasonal}
+                onChange={(e) => handleToggleChange('seasonal', e.target.checked)}
+                className="rounded border-nv-sand focus:ring-nv-terracotta"
+              />
+              <span className="text-sm font-medium text-nv-night">Seasonal</span>
+            </label>
+            
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showVegetarian}
+                onChange={(e) => handleToggleChange('vegetarian', e.target.checked)}
+                className="rounded border-nv-sand focus:ring-nv-terracotta"
+              />
+              <span className="text-sm font-medium text-nv-night">Vegetarian Only</span>
+            </label>
           </div>
-          <div className={`flex gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <button
-              onClick={() => setPopularOnly((v) => !v)}
-              className={`px-4 py-2 rounded-lg font-body text-sm border-2 transition-colors ${
-                popularOnly ? 'bg-nv-terracotta text-white border-nv-terracotta' : 'border-nv-sand text-nv-ink hover:border-nv-olive'
-              }`}
-            >
-              ⭐ {locale === 'ku' ? 'بەناوبانگ' : 'Popular'}
-            </button>
-            <button
-              onClick={() => setSeasonalOnly((v) => !v)}
-              className={`px-4 py-2 rounded-lg font-body text-sm border-2 transition-colors ${
-                seasonalOnly ? 'bg-nv-terracotta text-white border-nv-terracotta' : 'border-nv-sand text-nv-ink hover:border-nv-olive'
-              }`}
-            >
-              🍂 {locale === 'ku' ? 'وەرزی' : 'Seasonal'}
-            </button>
-            <button
-              onClick={() => setVegOnly((v) => !v)}
-              className={`px-4 py-2 rounded-lg font-body text-sm border-2 transition-colors ${
-                vegOnly ? 'bg-nv-terracotta text-white border-nv-terracotta' : 'border-nv-sand text-nv-ink hover:border-nv-olive'
-              }`}
-            >
-              🌱 {locale === 'ku' ? 'گیاخۆر' : 'Veg'}
-            </button>
-          </div>
+
+          <select
+            value={sortBy}
+            onChange={(e) => handleSortChange(e.target.value as 'name' | 'price' | 'popularity')}
+            className="px-3 py-2 bg-nv-paper border border-nv-sand rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-nv-terracotta"
+          >
+            <option value="popularity">Sort by Popularity</option>
+            <option value="name">Sort by Name</option>
+            <option value="price">Sort by Price</option>
+          </select>
         </div>
       </div>
 
-      {/* Recommendations Rail */}
-      {recommended.length > 0 && (
-        <section>
-          <div className={`flex items-baseline justify-between mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <h2 className="font-heading text-2xl font-bold text-nv-ink">
-              {locale === 'ku' ? 'پێشنیارکراو بۆ تۆ' : 'Recommended for you'}
-            </h2>
-            <span className="font-body text-sm text-nv-olive">
-              {locale === 'ku' ? 'لەسەر بنەمای هەڵبژاردەوە و کات' : 'Based on your preferences and time'}
-            </span>
-          </div>
-          <div className="overflow-x-auto">
-            <div className={`grid grid-flow-col auto-cols-[minmax(260px,1fr)] gap-4 pb-2 ${isRTL ? 'direction-rtl' : ''}`}>
-              {recommended.map((item) => (
-                <MenuItemCard key={`rec-${item.id}`} item={item} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Results Count */}
-      <div className={`text-sm font-body text-nv-olive ${isRTL ? 'text-right' : ''}`}>
-        {filteredItems.length} {locale === 'ku' ? 'خواردن' : 'items'}
+      <div className="flex items-center justify-between">
+        <p className="text-nv-olive">
+          {filteredItems.length === 0 
+            ? 'No dishes found'
+            : filteredItems.length === 1
+            ? '1 dish found'
+            : `${filteredItems.length} dishes found`
+          }
+        </p>
+        
+        {(searchTerm || selectedCategory !== 'all' || showPopular || showSeasonal || showVegetarian) && (
+          <button
+            onClick={() => {
+              setSearchTerm('');
+              setSelectedCategory('all');
+              setShowPopular(false);
+              setShowSeasonal(false);
+              setShowVegetarian(false);
+              updateURL({ 
+                search: '', 
+                category: 'all', 
+                popular: false, 
+                seasonal: false, 
+                vegetarian: false 
+              });
+            }}
+            className="text-sm text-nv-terracotta hover:text-nv-saffron font-medium"
+          >
+            Clear all filters
+          </button>
+        )}
       </div>
 
-      {/* Grid */}
-      <motion.div
-        className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        {filteredItems.map((item) => (
-          <MenuItemCard key={item.id} item={item} data-testid="menu-item" />
-        ))}
-      </motion.div>
+      {/* Menu Grid */}
+      <AnimatePresence mode="wait">
+        {filteredItems.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="text-center py-20"
+          >
+            <div className="w-16 h-16 bg-nv-sand/50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-nv-olive/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 className="font-heading text-xl font-semibold text-nv-night mb-2">
+              No dishes found
+            </h3>
+            <p className="text-nv-olive">
+              Try adjusting your filters or search for something else.
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {filteredItems.map((item, index) => (
+              <MenuItemCard key={item.id} item={item} index={index} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

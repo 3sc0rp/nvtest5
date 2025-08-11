@@ -1,35 +1,101 @@
-import Image from 'next/image';
-import { getPatternPath } from '@/lib/assets';
+'use client';
+
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
+import EmbroideryDivider from './EmbroideryDivider';
 
 interface SectionProps {
   id?: string;
   title?: string;
   description?: string;
   className?: string;
+  containerClassName?: string;
   children: React.ReactNode;
+  showDivider?: boolean;
+  dividerVariant?: 'pomegranate' | 'floral' | 'minimal';
+  background?: 'default' | 'surface' | 'texture';
 }
 
-export default function Section({ id, title, description, className, children }: SectionProps) {
+export default function Section({ 
+  id, 
+  title, 
+  description, 
+  className, 
+  containerClassName,
+  children, 
+  showDivider = true,
+  dividerVariant = 'pomegranate',
+  background = 'default'
+}: SectionProps) {
+  const backgroundClasses = {
+    default: '',
+    surface: 'bg-surface',
+    texture: 'texture-paper'
+  };
+
   return (
-    <section id={id} className={clsx('relative py-12', className)}>
-      {(title || description) && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-          <div className="text-center">
-            {title && (
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-nv-ink">{title}</h2>
-            )}
-            {description && (
-              <p className="font-body text-nv-olive mt-2 max-w-2xl mx-auto">{description}</p>
-            )}
-          </div>
-          {/* Divider */}
-          <div className="mt-6 h-6 w-full overflow-hidden opacity-60" aria-hidden>
-            <div className="relative h-full" style={{ backgroundImage: `url(${getPatternPath('pomegranate')})`, backgroundRepeat: 'repeat', backgroundSize: 'auto 80%' }} />
-          </div>
-        </div>
+    <section 
+      id={id} 
+      className={clsx(
+        'relative py-section',
+        backgroundClasses[background],
+        className
       )}
-      {children}
+    >
+      <div className={clsx('max-w-7xl mx-auto px-4 sm:px-6 lg:px-8', containerClassName)}>
+        {/* Section Header */}
+        {(title || description) && (
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            {title && (
+              <motion.h2 
+                className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-nv-night mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {title}
+              </motion.h2>
+            )}
+            
+            {description && (
+              <motion.p 
+                className="font-body text-lg text-nv-olive max-w-3xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                {description}
+              </motion.p>
+            )}
+
+            {/* Embroidery Divider */}
+            {showDivider && (title || description) && (
+              <EmbroideryDivider 
+                variant={dividerVariant}
+                className="mt-8"
+              />
+            )}
+          </motion.div>
+        )}
+
+        {/* Section Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: title || description ? 0.6 : 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          {children}
+        </motion.div>
+      </div>
     </section>
   );
 }

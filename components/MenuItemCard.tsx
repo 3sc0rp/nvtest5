@@ -1,22 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-// Removed i18n import
-// Removed language toggle
-import Badge, { DietaryBadge, SpiceBadge, CategoryBadge, TagBadge, PopularityBadge, PriceBadge } from './Badge';
+import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
 interface MenuItem {
   id: string;
-  name: {
-    en: string;
-    ku: string;
-  };
-  description: {
-    en: string;
-    ku: string;
-  };
+  name: { en: string; ku: string };
+  description: { en: string; ku: string };
   price: number;
   image: string;
   category: string;
@@ -29,300 +20,166 @@ interface MenuItem {
   halal: boolean;
   prepTime: string;
   calories: number;
-  featured: boolean;
+  featured?: boolean;
 }
 
 interface MenuItemCardProps {
   item: MenuItem;
-  onClick?: (item: MenuItem) => void;
-  onAddToCart?: (item: MenuItem) => void;
-  showFullDetails?: boolean;
-  variant?: 'default' | 'compact' | 'featured';
-  className?: string;
+  index?: number;
 }
 
-export default function MenuItemCard({
-  item,
-  onClick,
-  onAddToCart,
-  showFullDetails = true,
-  variant = 'default',
-  className = ''
-}: MenuItemCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const locale = 'en';
-  const isRTL = false;
+export default function MenuItemCard({ item, index = 0 }: MenuItemCardProps) {
+  const isPopular = item.popularity >= 8;
+  const isMostPopular = item.popularity >= 9;
 
-  const cardVariants = {
-    default: "bg-white rounded-xl shadow-lg hover:shadow-xl",
-    compact: "bg-white rounded-lg shadow-md hover:shadow-lg",
-    featured: "bg-gradient-to-br from-white to-nv-sand/20 rounded-xl shadow-xl hover:shadow-2xl border border-nv-saffron/20"
-  };
+  // Dietary badges
+  const dietaryBadges = [
+    item.vegetarian ? { label: 'V', title: 'Vegetarian', color: 'bg-green-100 text-green-800' } : null,
+    item.vegan ? { label: 'VG', title: 'Vegan', color: 'bg-green-100 text-green-800' } : null,
+    item.halal ? { label: 'H', title: 'Halal', color: 'bg-blue-100 text-blue-800' } : null,
+  ].filter((badge): badge is { label: string; title: string; color: string } => badge !== null);
 
-  const handleClick = () => {
-    if (onClick) {
-      onClick(item);
-    } else {
-      setIsExpanded(!isExpanded);
-    }
-  };
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onAddToCart) {
-      onAddToCart(item);
-    }
-  };
-
-  const formatPrice = (price: number) => `$${price.toFixed(2)}`;
+  // Spice level indicators
+  const spiceChilis = Array.from({ length: 3 }, (_, i) => (
+    <svg
+      key={i}
+      className={clsx(
+        'w-3 h-3',
+        i < item.spiceLevel ? 'text-red-500' : 'text-gray-300'
+      )}
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 6a3 3 0 11-6 0 3 3 0 016 0zM3 6a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  ));
 
   return (
     <motion.div
-      className={`${cardVariants[variant]} overflow-hidden transition-all duration-300 cursor-pointer group ${className}`}
-      onClick={handleClick}
-      whileHover={{ y: -4 }}
+      className="menu-card card-elevated group relative overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      layout
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      whileHover={{ y: -4 }}
     >
-      {/* Image Section */}
-      <div className="relative h-48 md:h-56 overflow-hidden" style={{ aspectRatio: '4/3' }}>
-        <div className={`absolute inset-0 bg-nv-sand/20 transition-opacity duration-300 ${imageLoaded ? 'opacity-0' : 'opacity-100'}`} />
-        
+      {/* Most Popular Ribbon */}
+      {isMostPopular && (
+        <div className="absolute top-0 right-0 z-10">
+          <div className="bg-nv-gold text-nv-night text-xs font-bold px-3 py-1 transform rotate-45 translate-x-6 translate-y-2 shadow-md">
+            Most Popular
+          </div>
+        </div>
+      )}
+
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden">
         <Image
           src={item.image}
-          alt={item.name[locale as 'en' | 'ku']}
+          alt={item.name.en}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          loading="lazy"
-          quality={80}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          onLoad={() => setImageLoaded(true)}
         />
-
-        {/* Overlay Badges */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-          {item.featured && (
-            <Badge variant="featured" icon="⭐" size="sm" animate={false}>
-              {locale === 'ku' ? 'تایبەت' : 'Featured'}
-            </Badge>
-          )}
-          {item.seasonal && (
-            <Badge variant="seasonal" icon="🍂" size="sm" animate={false}>
-              {locale === 'ku' ? 'وەرزی' : 'Seasonal'}
-            </Badge>
-          )}
-        </div>
-
-        {/* Price Badge */}
-        <div className="absolute top-3 right-3">
-          <PriceBadge price={item.price} animate={false} />
-        </div>
-
-        {/* Category Badge */}
-        <div className="absolute bottom-3 left-3">
-          <CategoryBadge category={item.category} size="sm" animate={false}>
-            {locale === 'ku' ? 
-              (item.category === 'main' ? 'سەرەکی' : 
-               item.category === 'appetizer' ? 'پێشخوان' :
-               item.category === 'dessert' ? 'شیرینی' :
-               item.category === 'beverage' ? 'خواردنەوە' :
-               item.category === 'soup' ? 'شۆربا' :
-               item.category === 'salad' ? 'زەڵاتە' :
-               item.category === 'side' ? 'لاوەکی' : item.category)
-              : item.category.charAt(0).toUpperCase() + item.category.slice(1)
-            }
-          </CategoryBadge>
-        </div>
-
-        {/* Popularity Score */}
-        {showFullDetails && (
-          <div className="absolute bottom-3 right-3">
-            <PopularityBadge score={item.popularity} size="sm" animate={false} />
+        
+        {/* Image Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-nv-night/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Featured Badge */}
+        {item.featured && (
+          <div className="absolute top-3 left-3">
+            <span className="bg-nv-terracotta text-nv-paper text-xs font-semibold px-2 py-1 rounded-full">
+              Featured
+            </span>
           </div>
         )}
 
-        {/* Quick Add Button */}
-        {onAddToCart && (
-          <motion.button
-            onClick={handleAddToCart}
-            className="absolute inset-0 bg-nv-terracotta/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-              <span className="text-2xl">🛒</span>
-            </span>
-          </motion.button>
-        )}
+        {/* Price Badge */}
+        <div className="absolute top-3 right-3">
+          <span className="price-badge">
+            ${item.price.toFixed(2)}
+          </span>
+        </div>
       </div>
 
-      {/* Content Section */}
-      <div className={`p-4 md:p-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-        {/* Title and Description */}
-        <div className="mb-4">
-          <h3 className="font-heading text-lg md:text-xl font-bold text-nv-ink mb-2 line-clamp-2 group-hover:text-nv-terracotta transition-colors duration-200">
-            {item.name[locale as 'en' | 'ku']}
+      {/* Content */}
+      <div className="p-6">
+        {/* Header */}
+        <div className="mb-3">
+          <h3 className="font-heading text-xl font-semibold text-nv-night mb-1 line-clamp-1">
+            {item.name.en}
           </h3>
           
-          <p className={`font-body text-nv-olive text-sm leading-relaxed ${isExpanded ? '' : 'line-clamp-2'}`}>
-            {item.description[locale as 'en' | 'ku']}
-          </p>
-          
-          {item.description[locale as 'en' | 'ku'].length > 120 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsExpanded(!isExpanded);
-              }}
-              className="text-nv-terracotta text-xs font-semibold mt-1 hover:underline"
-            >
-              {isExpanded 
-                ? (locale === 'ku' ? 'کەمتر' : 'Show less')
-                : (locale === 'ku' ? 'زیاتر' : 'Read more')
-              }
-            </button>
-          )}
+          {/* Meta Info */}
+          <div className="flex items-center justify-between text-sm text-nv-olive">
+            <span className="flex items-center gap-1">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+              </svg>
+              {item.prepTime}
+            </span>
+            
+            <span className="flex items-center gap-1">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              {item.popularity.toFixed(1)}
+            </span>
+          </div>
         </div>
 
-        {/* Dietary and Spice Badges */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {item.halal && (
-            <DietaryBadge type="halal" size="sm">
-              {locale === 'ku' ? 'حەڵاڵ' : 'Halal'}
-            </DietaryBadge>
-          )}
-          {item.vegetarian && (
-            <DietaryBadge type="vegetarian" size="sm">
-              {locale === 'ku' ? 'گیاخۆر' : 'Vegetarian'}
-            </DietaryBadge>
-          )}
-          {item.vegan && (
-            <DietaryBadge type="vegan" size="sm">
-              {locale === 'ku' ? 'ڕاستە گیاخۆر' : 'Vegan'}
-            </DietaryBadge>
-          )}
-          
+        {/* Description */}
+        <p className="font-body text-nv-olive text-sm leading-relaxed mb-4 line-clamp-2">
+          {item.description.en}
+        </p>
+
+        {/* Tags and Badges */}
+        <div className="flex items-center justify-between">
+          {/* Dietary Badges */}
+          <div className="flex items-center gap-2">
+            {dietaryBadges.map((badge, i) => (
+              <span
+                key={i}
+                className={clsx(
+                  'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium',
+                  badge.color
+                )}
+                title={badge.title}
+              >
+                {badge.label}
+              </span>
+            ))}
+          </div>
+
+          {/* Spice Level */}
           {item.spiceLevel > 0 && (
-            <SpiceBadge level={item.spiceLevel} size="sm">
-              {locale === 'ku' ? 'تیژی' : 'Spice'} {item.spiceLevel}/3
-            </SpiceBadge>
+            <div className="flex items-center gap-1" title={`Spice level: ${item.spiceLevel}/3`}>
+              {spiceChilis}
+            </div>
           )}
         </div>
 
         {/* Tags */}
-        {showFullDetails && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-4">
-            {item.tags.slice(0, 3).map((tag) => (
-              <TagBadge key={tag} tag={tag} size="sm">
-                {locale === 'ku' ? 
-                  (tag === 'traditional' ? 'نەریتی' :
-                   tag === 'popular' ? 'بەناوبانگ' :
-                   tag === 'healthy' ? 'تەندروست' :
-                   tag === 'spicy' ? 'تیژ' :
-                   tag === 'sweet' ? 'شیرین' : tag)
-                  : tag.replace('-', ' ')
-                }
-              </TagBadge>
-            ))}
-            {item.tags.length > 3 && (
-              <Badge variant="tag" size="sm">
-                +{item.tags.length - 3}
-              </Badge>
-            )}
+        {item.tags.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-nv-sand/50">
+            <div className="flex flex-wrap gap-1">
+              {item.tags.slice(0, 3).map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-block bg-nv-sand/50 text-nv-olive text-xs px-2 py-1 rounded-md capitalize"
+                >
+                  {tag.replace('-', ' ')}
+                </span>
+              ))}
+              {item.tags.length > 3 && (
+                <span className="text-xs text-nv-olive/70">
+                  +{item.tags.length - 3} more
+                </span>
+              )}
+            </div>
           </div>
         )}
-
-        {/* Expanded Details */}
-        <AnimatePresence>
-          {isExpanded && showFullDetails && (
-            <motion.div
-              className="border-t border-nv-sand pt-4 mt-4"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="font-semibold text-nv-ink">
-                    {locale === 'ku' ? 'کات:' : 'Prep Time:'}
-                  </span>
-                  <span className="text-nv-olive ml-2">{item.prepTime}</span>
-                </div>
-                <div>
-                  <span className="font-semibold text-nv-ink">
-                    {locale === 'ku' ? 'کالۆری:' : 'Calories:'}
-                  </span>
-                  <span className="text-nv-olive ml-2">{item.calories}</span>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Action Buttons */}
-        <div className={`flex items-center justify-between mt-4 pt-4 border-t border-nv-sand/50 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <div className="flex items-center space-x-2">
-            <span className="font-heading text-xl font-bold text-nv-terracotta">
-              {formatPrice(item.price)}
-            </span>
-          </div>
-
-          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-            {onAddToCart && (
-              <motion.button
-                onClick={handleAddToCart}
-                className="bg-nv-terracotta hover:bg-nv-terracotta/90 text-white px-4 py-2 rounded-lg font-body font-semibold text-sm transition-colors duration-200"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="flex items-center space-x-1">
-                  <span>🛒</span>
-                  <span>{locale === 'ku' ? 'زیادکردن' : 'Add'}</span>
-                </span>
-              </motion.button>
-            )}
-
-            <motion.button
-              onClick={handleClick}
-              className="border-2 border-nv-olive text-nv-olive hover:bg-nv-olive hover:text-white px-3 py-2 rounded-lg font-body font-semibold text-sm transition-colors duration-200"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {locale === 'ku' ? 'وردەکاری' : 'Details'}
-            </motion.button>
-          </div>
-        </div>
       </div>
     </motion.div>
-  );
-}
-
-// Compact variant for lists
-export function CompactMenuItemCard({ item, ...props }: Omit<MenuItemCardProps, 'variant'>) {
-  return (
-    <MenuItemCard 
-      {...props} 
-      item={item} 
-      variant="compact" 
-      showFullDetails={false}
-    />
-  );
-}
-
-// Featured variant for highlighting
-export function FeaturedMenuItemCard({ item, ...props }: Omit<MenuItemCardProps, 'variant'>) {
-  return (
-    <MenuItemCard 
-      {...props} 
-      item={item} 
-      variant="featured" 
-      showFullDetails={true}
-    />
   );
 }

@@ -2,65 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  
-  /* Nature Village Brand Colors - WCAG AA Compliant */
-  --nv-terracotta: #A04622; /* Enhanced contrast from #B4532A */
-  --nv-saffron: #C56900; /* Enhanced contrast from #D97706 */
-  --nv-olive: #4F6329; /* Enhanced contrast from #556B2F */
+  /* Nature Village Brand Colors - Premium Kurdish Palette */
+  --nv-terracotta: #B4532A;
+  --nv-saffron: #D97706;
+  --nv-olive: #556B2F;
+  --nv-night: #0F1A14;
   --nv-sand: #E8D8B5;
-  --nv-ink: #0F1A14;
   --nv-paper: #FBF7ED;
+  --nv-gold: #C1A35B;
   
-  /* Focus ring colors */
+  /* Semantic Color Mappings */
+  --color-primary: var(--nv-terracotta);
+  --color-secondary: var(--nv-olive);
+  --color-accent: var(--nv-saffron);
+  --color-text: var(--nv-night);
+  --color-text-muted: var(--nv-olive);
+  --color-background: var(--nv-paper);
+  --color-surface: #ffffff;
+  --color-border: rgba(85, 107, 47, 0.2);
+  
+  /* Typography Scale */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Shadows - Warm, Elevated */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 26, 20, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 26, 20, 0.1), 0 2px 4px -1px rgba(15, 26, 20, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 26, 20, 0.1), 0 4px 6px -2px rgba(15, 26, 20, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 26, 20, 0.1), 0 10px 10px -5px rgba(15, 26, 20, 0.04);
+  
+  /* Spacing Scale */
+  --space-section: 6rem;
+  --space-component: 3rem;
+  --space-element: 1.5rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  /* Focus States */
   --focus-ring: #2563eb;
-  --focus-ring-offset: #ffffff;
+  --focus-ring-offset: var(--nv-paper);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --focus-ring-offset: #0a0a0a;
-  }
-}
-
-/* Skip to content link */
-.skip-link {
-  position: absolute;
-  top: -100vh;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: var(--nv-ink);
-  color: var(--nv-paper);
-  padding: 12px 24px;
-  border-radius: 0 0 8px 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: top 0.2s ease-in-out;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
-/* Enhanced focus indicators */
+/* Global Base Styles */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-background);
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(232, 216, 181, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(193, 163, 91, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography Hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+    color: var(--color-text);
+  }
+  
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.75rem; }
+  h3 { font-size: 2.25rem; }
+  h4 { font-size: 1.875rem; }
+  h5 { font-size: 1.5rem; }
+  h6 { font-size: 1.25rem; }
+  
+  p, li {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+  
+  /* Focus Management */
   *:focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
   }
   
-  /* Remove default outline */
   *:focus {
     outline: none;
   }
   
-  /* Button focus states */
+  /* Button Focus */
   button:focus-visible,
   a[role="button"]:focus-visible {
     outline: 2px solid var(--focus-ring);
@@ -68,7 +113,7 @@
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
   }
   
-  /* Form element focus states */
+  /* Form Focus */
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
@@ -78,7 +123,107 @@
   }
 }
 
-/* Reduced motion preferences */
+/* Skip to Content */
+.skip-link {
+  position: absolute;
+  top: -100vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: var(--nv-night);
+  color: var(--nv-paper);
+  padding: 12px 24px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Kurdish Pattern Backgrounds */
+.pattern-overlay {
+  position: relative;
+}
+
+.pattern-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/patterns/floral-corner.svg');
+  background-repeat: no-repeat;
+  background-position: top left, bottom right;
+  background-size: 120px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Texture Background */
+.texture-paper {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(85, 107, 47, 0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Animated Elements */
+@keyframes sun-rays {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.animate-sun-rays {
+  animation: sun-rays 14s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient Overlays */
+.gradient-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 26, 20, 0.35) 0%,
+    rgba(180, 83, 42, 0.25) 50%,
+    rgba(217, 151, 6, 0.35) 100%
+  );
+}
+
+/* Premium Card Styles */
+.card-elevated {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.card-elevated:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Kurdish Embroidery Patterns */
+.embroidery-border {
+  background-image: url('/patterns/pomegranate-border.svg');
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
+  opacity: 0.6;
+}
+
+/* Accessibility & Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -89,91 +234,41 @@
     scroll-behavior: auto !important;
   }
   
-  /* Disable Framer Motion animations */
-  [data-motion] {
-    transform: none !important;
-    transition: none !important;
+  .animate-sun-rays,
+  .animate-float {
+    animation: none !important;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* High contrast mode support */
+/* High Contrast Support */
 @media (prefers-contrast: high) {
   :root {
     --nv-terracotta: #8B0000;
     --nv-olive: #006400;
-    --nv-ink: #000000;
+    --nv-night: #000000;
     --nv-paper: #FFFFFF;
+    --color-border: #000000;
   }
 }
 
-/* RTL Support for Kurdish */
-[dir="rtl"] {
-  direction: rtl;
-  text-align: right;
-}
-
-[dir="rtl"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 1;
-}
-
-[dir="rtl"] .flex-row-reverse {
-  flex-direction: row-reverse;
-}
-
-/* RTL-specific spacing adjustments */
-[dir="rtl"] .mr-2 {
-  margin-right: 0;
-  margin-left: 0.5rem;
-}
-
-[dir="rtl"] .ml-2 {
-  margin-left: 0;
-  margin-right: 0.5rem;
-}
-
-[dir="rtl"] .pr-4 {
-  padding-right: 0;
-  padding-left: 1rem;
-}
-
-[dir="rtl"] .pl-4 {
-  padding-left: 0;
-  padding-right: 1rem;
-}
-
-/* RTL text direction utilities */
-.direction-rtl {
-  direction: rtl;
-}
-
-.direction-ltr {
-  direction: ltr;
-}
-
-/* Kurdish font optimization */
-[lang="ku"] {
-  font-family: 'Arial Unicode MS', 'Tahoma', 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
-}
-
-/* Kurdish number styling */
-[lang="ku"] .kurdish-numbers {
-  font-feature-settings: 'locl' 1;
-}
-
+/* Utility Classes */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
   
-  /* Screen reader only */
+  .backdrop-blur-warm {
+    backdrop-filter: blur(12px) saturate(180%);
+    background-color: rgba(251, 247, 237, 0.8);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, var(--nv-terracotta), var(--nv-saffron));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
   .sr-only {
     position: absolute;
     width: 1px;
@@ -185,15 +280,68 @@ body {
     white-space: nowrap;
     border: 0;
   }
-  
-  .sr-only-focusable:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: inherit;
-    margin: inherit;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-  }
+}
+
+/* Component-Specific Styles */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--nv-terracotta);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.btn-hover-lift {
+  transition: all 0.2s ease;
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -8px rgba(180, 83, 42, 0.3);
+}
+
+/* Menu Card Styling */
+.menu-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--nv-terracotta), var(--nv-gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-card:hover::before {
+  opacity: 1;
+}
+
+/* Gold accent for pricing */
+.price-badge {
+  background: linear-gradient(135deg, var(--nv-gold), #D4AF37);
+  color: var(--nv-night);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 4px rgba(193, 163, 91, 0.2);
 }

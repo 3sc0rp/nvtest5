@@ -2,191 +2,187 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import clsx from 'clsx';
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Menu', href: '/menu' },
+  { name: 'Reservations', href: '/reservations' },
+  { name: 'Order', href: '/order' },
+  { name: 'About', href: '/about' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Contact', href: '/contact' },
+];
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  // Close mobile menu when Escape key is pressed
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isMobileMenuOpen]);
-
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/menu', label: 'Menu' },
-    { href: '/about', label: 'About' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/contact', label: 'Contact' },
-  ];
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-nv-paper/95 backdrop-blur-md shadow-lg border-b border-nv-sand'
-          : 'bg-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="relative">
-              <div className="w-10 h-10 bg-nv-terracotta rounded-full flex items-center justify-center">
-                <span className="text-nv-paper font-bold text-lg">N</span>
+    <>
+      <header
+        className={clsx(
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          isScrolled
+            ? 'backdrop-blur-warm shadow-lg py-3'
+            : 'bg-transparent py-4'
+        )}
+      >
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <Link 
+              href="/" 
+              className="flex items-center space-x-2 group"
+              onClick={closeMobileMenu}
+            >
+              <div className="relative">
+                <div 
+                  className="w-8 h-8 bg-pattern-sun bg-contain bg-no-repeat bg-center animate-sun-rays"
+                  style={{ 
+                    filter: 'hue-rotate(25deg) saturate(1.2)',
+                  }}
+                />
               </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-nv-saffron rounded-full"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading text-xl font-bold text-nv-ink">
-                Nature Village
-              </span>
-              <span className="font-body text-xs text-nv-olive -mt-1">
-                Kurdish Restaurant
-              </span>
-            </div>
-          </Link>
+              <div className="flex flex-col">
+                <span className="font-heading text-xl font-bold text-nv-night group-hover:text-nv-terracotta transition-colors">
+                  Nature Village
+                </span>
+                <span className="text-xs text-nv-olive tracking-wide uppercase">
+                  Kurdish Cuisine
+                </span>
+              </div>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-body text-nv-ink hover:text-nv-terracotta transition-colors duration-200 relative group"
-                prefetch={true}
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={clsx(
+                    'nav-link px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                    pathname === item.href
+                      ? 'text-nv-terracotta bg-nv-terracotta/10 active'
+                      : 'text-nv-night hover:text-nv-terracotta hover:bg-nv-terracotta/5'
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              className="md:hidden p-2 rounded-lg text-nv-night hover:text-nv-terracotta hover:bg-nv-terracotta/10 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle mobile menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-nv-terracotta transition-all duration-200 group-hover:w-full"></span>
-              </Link>
-            ))}
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
+        </nav>
+      </header>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/reservations"
-              className="bg-nv-terracotta hover:bg-nv-terracotta/90 text-nv-paper font-body font-semibold px-6 py-2 rounded-lg transition-colors duration-200"
-              prefetch={true}
-            >
-              Reserve Table
-            </Link>
-            <Link
-              href="/order"
-              className="border-2 border-nv-olive text-nv-olive hover:bg-nv-olive hover:text-nv-paper font-body font-semibold px-6 py-2 rounded-lg transition-colors duration-200"
-              prefetch={true}
-            >
-              Order Online
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden relative w-6 h-6 focus:outline-none"
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span
-              className={`absolute left-0 top-1 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
-                isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-2.5 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
-                isMobileMenuOpen ? 'opacity-0' : ''
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-4 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
-                isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}
-            />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            className="md:hidden bg-nv-paper/98 backdrop-blur-md border-t border-nv-sand"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            role="menu"
-            aria-label="Mobile navigation menu"
-          >
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="block font-body text-lg text-nv-ink hover:text-nv-terracotta transition-colors duration-200 py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    role="menuitem"
-                    tabIndex={0}
-                    prefetch={true}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              
-              <div className="pt-4 space-y-3">
-                <Link
-                  href="/reservations"
-                  className="block w-full text-center bg-nv-terracotta text-nv-paper font-body font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  prefetch={true}
-                >
-                  Reserve Table
-                </Link>
-                <Link
-                  href="/order"
-                  className="block w-full text-center border-2 border-nv-olive text-nv-olive font-body font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  prefetch={true}
-                >
-                  Order Online
-                </Link>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-nv-night/20 backdrop-blur-sm md:hidden"
+              onClick={closeMobileMenu}
+            />
+
+            {/* Mobile Menu Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-20 left-4 right-4 z-40 md:hidden"
+            >
+              <div className="bg-nv-paper rounded-2xl shadow-xl border border-nv-sand p-6">
+                <nav className="space-y-3">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className={clsx(
+                        'block px-4 py-3 text-base font-medium rounded-xl transition-all duration-200',
+                        pathname === item.href
+                          ? 'text-nv-terracotta bg-nv-terracotta/10 border border-nv-terracotta/20'
+                          : 'text-nv-night hover:text-nv-terracotta hover:bg-nv-terracotta/5'
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </nav>
+
+                {/* Mobile Contact Info */}
+                <div className="mt-6 pt-6 border-t border-nv-sand">
+                  <div className="text-center space-y-2">
+                    <p className="text-sm font-medium text-nv-night">Call for Reservations</p>
+                    <a 
+                      href="tel:+15551234567" 
+                      className="text-lg font-bold text-nv-terracotta hover:text-nv-saffron transition-colors"
+                    >
+                      (555) 123-4567
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </motion.nav>
+
+      {/* Spacer for fixed header */}
+      <div className="h-20" />
+    </>
   );
 }

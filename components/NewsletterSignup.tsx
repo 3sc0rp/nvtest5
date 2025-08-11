@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useTranslations, useLocale } from 'next-intl';
-// Removed language toggle
+// Removed locale imports - using English only
 
 // Zod schema for form validation
 const newsletterSchema = z.object({
@@ -31,9 +30,7 @@ export default function NewsletterSignup() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
-  // const t = useTranslations('newsletter'); // Unused for now
+  // Removed locale dependencies - using English only
 
   const {
     register,
@@ -74,22 +71,22 @@ export default function NewsletterSignup() {
   const preferenceOptions = [
     {
       id: 'new-dishes',
-      label: locale === 'ku' ? 'خواردنە نوێیەکان' : 'New Dishes',
+      label: 'New Dishes',
       icon: '🍽️'
     },
     {
       id: 'events',
-      label: locale === 'ku' ? 'بۆنە تایبەتەکان' : 'Special Events',
+      label: 'Special Events',
       icon: '🎉'
     },
     {
       id: 'promotions',
-      label: locale === 'ku' ? 'داشکاندنەکان' : 'Promotions',
+      label: 'Promotions',
       icon: '🎊'
     },
     {
       id: 'cooking-tips',
-      label: locale === 'ku' ? 'ڕاوێژی چێشت' : 'Cooking Tips',
+      label: 'Cooking Tips',
       icon: '👨‍🍳'
     }
   ];
@@ -115,13 +112,10 @@ export default function NewsletterSignup() {
             >
               <div className="text-6xl mb-6">🎉</div>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-nv-ink mb-4">
-                {locale === 'ku' ? 'سوپاس!' : 'Thank You!'}
+                Thank You!
               </h2>
               <p className="font-body text-lg text-nv-olive mb-6">
-                {locale === 'ku' 
-                  ? 'بە سەرکەوتوویی ئابونەی نووسراوەکانمان بوویت. زۆر بە زووی یەکەم نووسراوەکەت وەردەگریت!'
-                  : 'You\'ve successfully subscribed to our newsletter. You\'ll receive your first update soon!'
-                }
+                You&apos;ve successfully subscribed to our newsletter. You&apos;ll receive your first update soon!
               </p>
               <motion.button
                 onClick={() => setIsSuccess(false)}
@@ -129,7 +123,7 @@ export default function NewsletterSignup() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {locale === 'ku' ? 'گەڕانەوە' : 'Subscribe Another'}
+                Subscribe Another
               </motion.button>
             </motion.div>
           ) : (
@@ -142,7 +136,7 @@ export default function NewsletterSignup() {
               transition={{ duration: 0.5 }}
             >
               {/* Header */}
-              <div className={`text-center mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <div className="text-center mb-8">
                 <motion.h2
                   className="font-heading text-3xl md:text-4xl font-bold text-nv-ink mb-4"
                   initial={{ opacity: 0, y: 20 }}
@@ -150,7 +144,7 @@ export default function NewsletterSignup() {
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  {locale === 'ku' ? 'لەگەڵمان بمێنەرەوە' : 'Stay Connected'}
+                  Stay Connected
                 </motion.h2>
                 <motion.p
                   className="font-body text-lg text-nv-olive max-w-2xl mx-auto"
@@ -159,10 +153,7 @@ export default function NewsletterSignup() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  {locale === 'ku' 
-                    ? 'یەکەم کەس بە کە کە زانیاری لەسەر خواردنە نوێیەکان، بۆنە تایبەتەکان و کۆمەڵگای گوندی سروشت وەردەگریت'
-                    : 'Be the first to know about new dishes, special events, and the latest from our Nature Village community'
-                  }
+                  Be the first to know about new dishes, special events, and the latest from our Nature Village community
                 </motion.p>
               </div>
 
@@ -180,9 +171,9 @@ export default function NewsletterSignup() {
                   <div className="md:col-span-1">
                     <label 
                       htmlFor="email"
-                      className={`block font-body text-sm font-semibold text-nv-ink mb-2 ${isRTL ? 'text-right' : 'text-left'}`}
+                      className="block font-body text-sm font-semibold text-nv-ink mb-2 text-left"
                     >
-                      {locale === 'ku' ? 'ئیمەیڵ *' : 'Email Address *'}
+                      Email Address *
                     </label>
                     <div className="relative">
                       <input
@@ -193,8 +184,8 @@ export default function NewsletterSignup() {
                           errors.email 
                             ? 'border-red-300 focus:border-red-500' 
                             : 'border-nv-sand focus:border-nv-terracotta'
-                        } focus:outline-none focus:ring-0 ${isRTL ? 'text-right' : 'text-left'}`}
-                        placeholder={locale === 'ku' ? 'ئیمەیڵەکەت بنووسە' : 'Enter your email'}
+                        } focus:outline-none focus:ring-0 text-left`}
+                        placeholder="Enter your email"
                       />
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                         <span className="text-nv-olive">✉️</span>
@@ -206,7 +197,7 @@ export default function NewsletterSignup() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                       >
-                        {locale === 'ku' ? 'ئیمەیڵێکی دروست بنووسە' : errors.email.message}
+                        {errors.email.message}
                       </motion.p>
                     )}
                   </div>
@@ -215,9 +206,9 @@ export default function NewsletterSignup() {
                   <div className="md:col-span-1">
                     <label 
                       htmlFor="firstName"
-                      className={`block font-body text-sm font-semibold text-nv-ink mb-2 ${isRTL ? 'text-right' : 'text-left'}`}
+                      className="block font-body text-sm font-semibold text-nv-ink mb-2 text-left"
                     >
-                      {locale === 'ku' ? 'ناوی یەکەم *' : 'First Name *'}
+                      First Name *
                     </label>
                     <div className="relative">
                       <input
@@ -228,8 +219,8 @@ export default function NewsletterSignup() {
                           errors.firstName 
                             ? 'border-red-300 focus:border-red-500' 
                             : 'border-nv-sand focus:border-nv-terracotta'
-                        } focus:outline-none focus:ring-0 ${isRTL ? 'text-right' : 'text-left'}`}
-                        placeholder={locale === 'ku' ? 'ناوەکەت بنووسە' : 'Enter your name'}
+                        } focus:outline-none focus:ring-0 text-left`}
+                        placeholder="Enter your name"
                       />
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                         <span className="text-nv-olive">👤</span>
@@ -241,7 +232,7 @@ export default function NewsletterSignup() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                       >
-                        {locale === 'ku' ? 'ناو پێویستە' : errors.firstName.message}
+                        {errors.firstName.message}
                       </motion.p>
                     )}
                   </div>
@@ -252,10 +243,10 @@ export default function NewsletterSignup() {
                   <button
                     type="button"
                     onClick={() => setShowPreferences(!showPreferences)}
-                    className={`flex items-center space-x-2 text-nv-olive hover:text-nv-terracotta transition-colors duration-200 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
+                    className="flex items-center space-x-2 text-nv-olive hover:text-nv-terracotta transition-colors duration-200"
                   >
                     <span className="font-body text-sm font-semibold">
-                      {locale === 'ku' ? 'هەڵبژاردەکانی نووسراوە' : 'Newsletter Preferences'}
+                      Newsletter Preferences
                     </span>
                     <motion.span
                       animate={{ rotate: showPreferences ? 180 : 0 }}
@@ -274,14 +265,14 @@ export default function NewsletterSignup() {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <p className={`font-body text-sm text-nv-olive mb-3 ${isRTL ? 'text-right' : 'text-left'}`}>
-                          {locale === 'ku' ? 'چی دەتەوێت لێمان بزانیت:' : 'What would you like to hear about:'}
+                        <p className="font-body text-sm text-nv-olive mb-3 text-left">
+                          What would you like to hear about:
                         </p>
                         <div className="grid grid-cols-2 gap-3">
                           {preferenceOptions.map((option) => (
                             <label
                               key={option.id}
-                              className={`flex items-center space-x-2 cursor-pointer ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
+                              className="flex items-center space-x-2 cursor-pointer"
                             >
                               <input
                                 {...register('preferences')}
@@ -303,17 +294,14 @@ export default function NewsletterSignup() {
 
                 {/* Terms Agreement */}
                 <div className="mt-6">
-                  <label className={`flex items-start space-x-3 cursor-pointer ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                  <label className="flex items-start space-x-3 cursor-pointer">
                     <input
                       {...register('agreeToTerms')}
                       type="checkbox"
                       className="mt-1 rounded border-nv-sand text-nv-terracotta focus:ring-nv-terracotta focus:ring-2"
                     />
-                    <span className={`font-body text-sm text-nv-olive ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {locale === 'ku' 
-                        ? 'ڕازی دەبم بە وەرگرتنی نووسراوەکان و مەرجەکانی خزمەتگوزاری'
-                        : 'I agree to receive newsletters and accept the terms of service'
-                      }
+                    <span className="font-body text-sm text-nv-olive text-left">
+                      I agree to receive newsletters and accept the terms of service
                     </span>
                   </label>
                   {errors.agreeToTerms && (
@@ -322,7 +310,7 @@ export default function NewsletterSignup() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                     >
-                      {locale === 'ku' ? 'پێویستە ڕازی بیت' : errors.agreeToTerms.message}
+                      {errors.agreeToTerms.message}
                     </motion.p>
                   )}
                 </div>
@@ -343,12 +331,12 @@ export default function NewsletterSignup() {
                     {isSubmitting ? (
                       <div className="flex items-center justify-center space-x-2">
                         <div className="w-5 h-5 border-2 border-nv-paper border-t-transparent rounded-full animate-spin" />
-                        <span>{locale === 'ku' ? 'تۆمارکردن...' : 'Subscribing...'}</span>
+                        <span>Subscribing...</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-center space-x-2">
                         <span>📧</span>
-                        <span>{locale === 'ku' ? 'ئابونە ببە' : 'Subscribe Now'}</span>
+                        <span>Subscribe Now</span>
                       </div>
                     )}
                   </motion.button>
@@ -356,10 +344,7 @@ export default function NewsletterSignup() {
 
                 {/* Privacy Note */}
                 <p className="mt-4 text-center font-body text-xs text-nv-olive">
-                  {locale === 'ku' 
-                    ? 'زانیارییەکانت پارێزراو دەمێنن. هەرگیز نافرۆشرێن.'
-                    : 'Your information is secure and will never be shared.'
-                  }
+                  Your information is secure and will never be shared.
                 </p>
               </motion.form>
             </motion.div>
@@ -377,28 +362,28 @@ export default function NewsletterSignup() {
           <div className="text-center">
             <div className="text-3xl mb-3">🎁</div>
             <h3 className="font-heading text-lg font-semibold text-nv-ink mb-2">
-              {locale === 'ku' ? 'دیاری بەخێرهاتن' : 'Welcome Gift'}
+              Welcome Gift
             </h3>
             <p className="font-body text-sm text-nv-olive">
-              {locale === 'ku' ? '١٠٪ داشکاندن بۆ یەکەم سەردان' : '10% off your first visit'}
+              10% off your first visit
             </p>
           </div>
           <div className="text-center">
             <div className="text-3xl mb-3">📅</div>
             <h3 className="font-heading text-lg font-semibold text-nv-ink mb-2">
-              {locale === 'ku' ? 'بۆنە تایبەتەکان' : 'Exclusive Events'}
+              Exclusive Events
             </h3>
             <p className="font-body text-sm text-nv-olive">
-              {locale === 'ku' ? 'یەکەم بزانە لە ئەداکاری نهێنی' : 'First to know about secret dinners'}
+              First to know about secret dinners
             </p>
           </div>
           <div className="text-center">
             <div className="text-3xl mb-3">👨‍🍳</div>
             <h3 className="font-heading text-lg font-semibold text-nv-ink mb-2">
-              {locale === 'ku' ? 'ڕێچکەی چێشت' : 'Recipe Secrets'}
+              Recipe Secrets
             </h3>
             <p className="font-body text-sm text-nv-olive">
-              {locale === 'ku' ? 'فێربوونی چێشتی کوردی لە ماڵەوە' : 'Learn Kurdish cooking at home'}
+              Learn Kurdish cooking at home
             </p>
           </div>
         </motion.div>

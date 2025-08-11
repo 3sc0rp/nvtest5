@@ -11,16 +11,10 @@ export default function NotFound() {
         </p>
         <div className="space-x-4">
           <Link 
-            href="/en" 
+            href="/" 
             className="inline-block bg-nv-terracotta text-nv-paper px-6 py-3 rounded-lg font-semibold hover:bg-nv-terracotta/90 transition-colors"
           >
-            Go Home (English)
-          </Link>
-          <Link 
-            href="/ku" 
-            className="inline-block bg-nv-olive text-nv-paper px-6 py-3 rounded-lg font-semibold hover:bg-nv-olive/90 transition-colors"
-          >
-            گەڕانەوە بۆ ماڵەوە (کوردی)
+            Go Home
           </Link>
         </div>
       </div>

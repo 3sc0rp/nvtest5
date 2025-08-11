@@ -128,7 +128,7 @@ export default function AssetShowcase() {
           <div className="bg-white rounded-lg p-6 shadow-lg text-center">
             <div className="flex justify-center mb-4">
               <Image
-                src={getPatternPath('pomegranate')}
+                src={getPatternPath('pomegranateBorder')}
                 alt="Pomegranate Border"
                 width={200}
                 height={40}
@@ -136,16 +136,16 @@ export default function AssetShowcase() {
               />
             </div>
             <h3 className="font-heading text-xl font-semibold text-nv-ink mb-2">
-              {ASSET_METADATA.patterns.pomegranate.name}
+              {ASSET_METADATA.patterns.pomegranateBorder.name}
             </h3>
             <p className="font-body text-sm text-nv-olive mb-2">
-              {ASSET_METADATA.patterns.pomegranate.description}
+              {ASSET_METADATA.patterns.pomegranateBorder.description}
             </p>
             <div className="text-xs text-nv-sand bg-nv-olive px-2 py-1 rounded inline-block mb-2">
-              {ASSET_METADATA.patterns.pomegranate.dimensions}
+              {ASSET_METADATA.patterns.pomegranateBorder.dimensions}
             </div>
             <p className="font-body text-xs text-nv-olive">
-              Usage: {ASSET_METADATA.patterns.pomegranate.usage}
+                              Usage: {ASSET_METADATA.patterns.pomegranateBorder.usage}
             </p>
           </div>
 
@@ -232,7 +232,7 @@ export default function AssetShowcase() {
         <div className="bg-white rounded-lg p-6 border-2 border-nv-sand">
           <div className="flex justify-center mb-4">
             <Image
-              src={getPatternPath('pomegranate')}
+              src={getPatternPath('pomegranateBorder')}
               alt=""
               width={400}
               height={80}
