@@ -4,18 +4,13 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
 import { getImagePath, getPatternPath } from '@/lib/assets';
-import { useCurrentLocale } from './LanguageToggle';
-import { accessibleMotion, heroTextVariants, staggerContainerVariants, prefersReducedMotion } from '@/lib/motion';
+import { heroTextVariants, staggerContainerVariants, prefersReducedMotion } from '@/lib/motion';
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const t = useTranslations('hero');
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
   const { scrollY } = useScroll();
-  
+
   // Parallax effects - respect reduced motion
   const shouldReduceMotion = prefersReducedMotion();
   const yBg = useTransform(scrollY, [0, 800], shouldReduceMotion ? [0, 0] : [0, 200]);
@@ -31,20 +26,20 @@ export default function Hero() {
 
   const containerVariants = staggerContainerVariants;
   const itemVariants = heroTextVariants;
-  
+
   const sunRaysVariants = {
     hidden: { opacity: 0, scale: shouldReduceMotion ? 1 : 0.8 },
     visible: { opacity: 0.6, scale: 1, transition: { duration: shouldReduceMotion ? 0 : 0.8 } },
   };
 
   return (
-    <section 
+    <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       aria-label="Hero section"
       role="banner"
     >
       {/* Background Image with Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 w-full h-full"
         style={{ y: yBg, scale }}
       >
@@ -62,7 +57,7 @@ export default function Hero() {
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
-          
+
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-nv-ink/40 via-transparent to-nv-ink/60" />
           <div className="absolute inset-0 bg-nv-terracotta/10" />
@@ -77,13 +72,13 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div 
+        <motion.div
           className="relative w-96 h-96 md:w-[600px] md:h-[600px] opacity-30"
           animate={{ rotate: 360 }}
-          transition={{ 
-            duration: 20, 
-            repeat: Infinity, 
-            ease: "linear" 
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
           }}
         >
           <Image
@@ -97,202 +92,113 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Decorative Floral Corners */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Top Left Corner */}
-        <motion.div
-          className="absolute top-8 left-8 w-16 h-16 md:w-24 md:h-24 opacity-60"
-          initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-          animate={{ opacity: 0.6, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          <Image
-            src={getPatternPath('floralCorner')}
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </motion.div>
-
-        {/* Top Right Corner */}
-        <motion.div
-          className="absolute top-8 right-8 w-16 h-16 md:w-24 md:h-24 opacity-60"
-          initial={{ opacity: 0, scale: 0.5, rotate: 90 }}
-          animate={{ opacity: 0.6, scale: 1, rotate: 90 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          <Image
-            src={getPatternPath('floralCorner')}
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </motion.div>
-
-        {/* Bottom Left Corner */}
-        <motion.div
-          className="absolute bottom-8 left-8 w-16 h-16 md:w-24 md:h-24 opacity-60"
-          initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-          animate={{ opacity: 0.6, scale: 1, rotate: -90 }}
-          transition={{ duration: 1, delay: 1.4 }}
-        >
-          <Image
-            src={getPatternPath('floralCorner')}
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </motion.div>
-
-        {/* Bottom Right Corner */}
-        <motion.div
-          className="absolute bottom-8 right-8 w-16 h-16 md:w-24 md:h-24 opacity-60"
-          initial={{ opacity: 0, scale: 0.5, rotate: 180 }}
-          animate={{ opacity: 0.6, scale: 1, rotate: 180 }}
-          transition={{ duration: 1, delay: 1.6 }}
-        >
-          <Image
-            src={getPatternPath('floralCorner')}
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </motion.div>
-      </div>
-
       {/* Hero Content */}
       <motion.div
-        className={`relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center ${
-          isRTL ? 'text-right' : 'text-left'
-        }`}
+        className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="max-w-4xl mx-auto">
-          {/* Main Headline */}
-          <motion.h1
-            className={`font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-nv-paper mb-6 ${
-              isRTL ? 'text-right' : 'text-left md:text-center'
-            }`}
-            variants={itemVariants}
-          >
-            <span className="block">
-              {locale === 'ku' ? 'تامی کوردی لە زاگرۆسەوە' : 'Kurdish flavors'}
-            </span>
-            <span className="block text-nv-saffron">
-              {locale === 'ku' ? '' : 'from the Zagros'}
-            </span>
-          </motion.h1>
+        {/* Welcome Text */}
+        <motion.p
+          className="font-body text-nv-sand/90 text-lg md:text-xl mb-4 tracking-wide"
+          variants={itemVariants}
+        >
+          Welcome to Nature Village
+        </motion.p>
 
-          {/* Subheading */}
-          <motion.p
-            className={`font-body text-lg sm:text-xl md:text-2xl text-nv-sand max-w-3xl mx-auto mb-8 leading-relaxed ${
-              isRTL ? 'text-right' : 'text-left md:text-center'
-            }`}
-            variants={itemVariants}
-          >
-            {t('subtitle')}
-          </motion.p>
+        {/* Main Headline */}
+        <motion.h1
+          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-nv-paper mb-6 leading-tight"
+          variants={itemVariants}
+        >
+          Kurdish flavors from the Zagros
+        </motion.h1>
 
-          {/* Call-to-Action Buttons */}
-          <motion.div
-            className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center ${
-              isRTL ? 'sm:flex-row-reverse' : ''
-            }`}
-            variants={itemVariants}
-          >
-            {/* Primary CTA - Reserve Table */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Link
-                href={`/${locale}/reservations`}
-                className="inline-flex items-center justify-center px-8 py-4 bg-nv-terracotta hover:bg-nv-terracotta/90 text-nv-paper font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
-                aria-label={`${t('cta_secondary')} - Make a table reservation`}
-                prefetch={true}
-              >
-                <span className="mr-2" aria-hidden="true">🍽️</span>
-                {t('cta_secondary')}
-              </Link>
-            </motion.div>
+        {/* Subtitle */}
+        <motion.p
+          className="font-body text-nv-sand text-lg md:text-xl leading-relaxed mb-12 max-w-3xl mx-auto"
+          variants={itemVariants}
+        >
+          Experience authentic Kurdish cuisine in a warm, welcoming atmosphere. Our restaurant brings you the rich flavors and traditions of Kurdish cooking passed down through generations in the heart of the Zagros Mountains.
+        </motion.p>
 
-            {/* Secondary CTA - Order Online */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Link
-                href={`/${locale}/order`}
-                className="inline-flex items-center justify-center px-8 py-4 bg-nv-olive hover:bg-nv-olive/90 text-nv-paper font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
-                aria-label="Order food online for delivery or pickup"
-                prefetch={true}
-              >
-                <span className="mr-2" aria-hidden="true">🛵</span>
-                {locale === 'ku' ? 'ئۆنلاین داوا بکە' : 'Order Online'}
-              </Link>
-            </motion.div>
-
-            {/* Tertiary CTA - View Menu */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Link
-                href={`/${locale}/menu`}
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-nv-sand text-nv-sand hover:bg-nv-sand hover:text-nv-ink font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
-                aria-label={`${t('cta_primary')} - View our full menu with prices`}
-                prefetch={true}
-              >
-                <span className="mr-2" aria-hidden="true">📖</span>
-                {t('cta_primary')}
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Additional Info */}
-          <motion.div
-            className="mt-12 pt-8 border-t border-nv-sand/30"
-            variants={itemVariants}
-          >
-            <p className="font-body text-nv-sand/80 text-sm md:text-base">
-              {locale === 'ku' 
-                ? 'لە دڵی گوند، چێژی خواردنی ڕەسەنی کوردی وەربگرە'
-                : 'In the heart of the village, experience authentic Kurdish cuisine'
-              }
-            </p>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.8 }}
-      >
+        {/* Call-to-Action Buttons */}
         <motion.div
-          className="w-6 h-10 border-2 border-nv-sand rounded-full flex justify-center"
-          animate={{ 
-            borderColor: ['rgba(232, 216, 181, 0.5)', 'rgba(232, 216, 181, 1)', 'rgba(232, 216, 181, 0.5)']
-          }}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+          variants={itemVariants}
+        >
+          {/* Primary CTA - Reserve Table */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <Link
+              href="/reservations"
+              className="inline-flex items-center justify-center px-8 py-4 bg-nv-terracotta hover:bg-nv-terracotta/90 text-nv-paper font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
+              aria-label="Make a table reservation"
+              prefetch={true}
+            >
+              <span className="mr-2" aria-hidden="true">🍽️</span>
+              Reserve Table
+            </Link>
+          </motion.div>
+
+          {/* Secondary CTA - Order Online */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <Link
+              href="/order"
+              className="inline-flex items-center justify-center px-8 py-4 bg-nv-olive hover:bg-nv-olive/90 text-nv-paper font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
+              aria-label="Order food online for delivery or pickup"
+              prefetch={true}
+            >
+              <span className="mr-2" aria-hidden="true">🛵</span>
+              Order Online
+            </Link>
+          </motion.div>
+
+          {/* Tertiary CTA - View Menu */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <Link
+              href="/menu"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-nv-sand text-nv-sand hover:bg-nv-sand hover:text-nv-ink font-body font-semibold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 min-w-[200px]"
+              aria-label="View our full menu with prices"
+              prefetch={true}
+            >
+              <span className="mr-2" aria-hidden="true">📖</span>
+              View Menu
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Hint */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          variants={itemVariants}
+          animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <motion.div
-            className="w-1.5 h-1.5 bg-nv-sand rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
+          <p className="font-body text-nv-sand/80 text-sm mb-2">
+            In the heart of the village, experience authentic Kurdish cuisine
+          </p>
+          <div className="w-6 h-10 border-2 border-nv-sand/60 rounded-full mx-auto relative">
+            <motion.div
+              className="w-1 h-3 bg-nv-sand/60 rounded-full absolute top-2 left-1/2 transform -translate-x-1/2"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
       </motion.div>
-
-      {/* Background Pattern Overlay for Mobile */}
-      <div className="absolute inset-0 bg-[url('/patterns/pomegranate-border.svg')] opacity-5 pointer-events-none md:hidden" />
     </section>
   );
 }

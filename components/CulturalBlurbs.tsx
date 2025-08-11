@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed language toggle
 import { fadeInVariants, staggerContainerVariants, prefersReducedMotion } from '@/lib/motion';
 
 export default function CulturalBlurbs() {

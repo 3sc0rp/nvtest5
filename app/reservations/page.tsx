@@ -1,15 +1,9 @@
 import type { Metadata } from 'next';
-import { buildMetadata } from '@/lib/seo';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params;
-  return buildMetadata({
-    title: 'Reservations - Nature Village',
-    description: 'Make a reservation at Nature Village Kurdish Restaurant. Book your table for an authentic dining experience.',
-    path: '/reservations',
-    locale,
-  });
-}
+export const metadata: Metadata = {
+  title: 'Reservations - Nature Village',
+  description: 'Make a reservation at Nature Village Kurdish Restaurant. Book your table for an authentic dining experience.',
+};
 
 export default function ReservationsPage() {
   return (

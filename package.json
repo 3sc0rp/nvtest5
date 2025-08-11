@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "check": "next build && next start -p 4000",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "playwright test",

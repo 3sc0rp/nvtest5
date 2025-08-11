@@ -2,34 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
-import LanguageToggle, { useCurrentLocale } from './LanguageToggle';
 
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const t = useTranslations('nav');
-  const brandT = useTranslations('brand');
-  const locale = useLocale();
-  const { isRTL } = useCurrentLocale();
-
-  const navLinks = [
-    { href: `/${locale}`, label: t('home') },
-    { href: `/${locale}/menu`, label: t('menu') },
-    { href: `/${locale}/reservations`, label: t('reservations') },
-    { href: `/${locale}/order`, label: t('order') },
-    { href: `/${locale}/about`, label: t('about') },
-    { href: `/${locale}/gallery`, label: t('gallery') },
-    { href: `/${locale}/contact`, label: t('contact') },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -45,17 +28,24 @@ export default function NavBar() {
         setIsMobileMenuOpen(false);
       }
     };
-
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isMobileMenuOpen]);
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/menu', label: 'Menu' },
+    { href: '/about', label: 'About' },
+    { href: '/gallery', label: 'Gallery' },
+    { href: '/contact', label: 'Contact' },
+  ];
 
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-nv-paper/95 backdrop-blur-md shadow-lg border-b border-nv-sand'
-          : 'bg-nv-paper/80 backdrop-blur-sm'
+          : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -64,22 +54,25 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href={`/${locale}`} className={`flex items-center space-x-2 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}>
-            <div className="w-10 h-10 bg-nv-terracotta rounded-full flex items-center justify-center">
-              <span className="text-nv-paper font-heading font-bold text-lg">NV</span>
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="relative">
+              <div className="w-10 h-10 bg-nv-terracotta rounded-full flex items-center justify-center">
+                <span className="text-nv-paper font-bold text-lg">N</span>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-nv-saffron rounded-full"></div>
             </div>
             <div className="flex flex-col">
-              <span className="font-heading text-lg font-bold text-nv-ink">
-                {brandT('name')}
+              <span className="font-heading text-xl font-bold text-nv-ink">
+                Nature Village
               </span>
               <span className="font-body text-xs text-nv-olive -mt-1">
-                {brandT('tagline')}
+                Kurdish Restaurant
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center space-x-8 ${isRTL ? 'space-x-reverse' : ''}`}>
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -93,22 +86,21 @@ export default function NavBar() {
             ))}
           </div>
 
-          {/* CTA Button & Language Toggle */}
-          <div className={`hidden md:flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-            <LanguageToggle />
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link
-              href={`/${locale}/reservations`}
+              href="/reservations"
               className="bg-nv-terracotta hover:bg-nv-terracotta/90 text-nv-paper font-body font-semibold px-6 py-2 rounded-lg transition-colors duration-200"
               prefetch={true}
             >
-              {t('reserve_table')}
+              Reserve Table
             </Link>
             <Link
-              href={`/${locale}/order`}
+              href="/order"
               className="border-2 border-nv-olive text-nv-olive hover:bg-nv-olive hover:text-nv-paper font-body font-semibold px-6 py-2 rounded-lg transition-colors duration-200"
               prefetch={true}
             >
-              {t('order_online')}
+              Order Online
             </Link>
           </div>
 
@@ -120,19 +112,19 @@ export default function NavBar() {
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            <motion.span
-              className={`absolute left-0 w-6 h-0.5 bg-nv-ink transform transition-all duration-300 ${
-                isMobileMenuOpen ? 'rotate-45 top-3' : 'top-1'
+            <span
+              className={`absolute left-0 top-1 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
             />
-            <motion.span
-              className={`absolute left-0 top-3 w-6 h-0.5 bg-nv-ink transition-opacity duration-300 ${
-                isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+            <span
+              className={`absolute left-0 top-2.5 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
+                isMobileMenuOpen ? 'opacity-0' : ''
               }`}
             />
-            <motion.span
-              className={`absolute left-0 w-6 h-0.5 bg-nv-ink transform transition-all duration-300 ${
-                isMobileMenuOpen ? '-rotate-45 top-3' : 'top-5'
+            <span
+              className={`absolute left-0 top-4 w-6 h-0.5 bg-nv-ink transition-all duration-300 ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             />
           </button>
@@ -173,24 +165,22 @@ export default function NavBar() {
                 </motion.div>
               ))}
               
-              {/* Mobile Language Toggle & CTA Buttons */}
-              <div className="pt-4 space-y-3 border-t border-nv-sand">
-                <div className="flex justify-center mb-4">
-                  <LanguageToggle />
-                </div>
+              <div className="pt-4 space-y-3">
                 <Link
-                  href={`/${locale}/reservations`}
-                  className="block w-full bg-nv-terracotta hover:bg-nv-terracotta/90 text-nv-paper font-body font-semibold px-6 py-3 rounded-lg text-center transition-colors duration-200"
+                  href="/reservations"
+                  className="block w-full text-center bg-nv-terracotta text-nv-paper font-body font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  prefetch={true}
                 >
-                  {t('reserve_table')}
+                  Reserve Table
                 </Link>
                 <Link
-                  href={`/${locale}/order`}
-                  className="block w-full border-2 border-nv-olive text-nv-olive hover:bg-nv-olive hover:text-nv-paper font-body font-semibold px-6 py-3 rounded-lg text-center transition-colors duration-200"
+                  href="/order"
+                  className="block w-full text-center border-2 border-nv-olive text-nv-olive font-body font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  prefetch={true}
                 >
-                  {t('order_online')}
+                  Order Online
                 </Link>
               </div>
             </div>

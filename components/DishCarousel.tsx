@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
-import { useCurrentLocale } from './LanguageToggle';
+// Removed language toggle
 import menuData from '@/data/menu.json';
 
 interface Dish {
