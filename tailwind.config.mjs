@@ -12,20 +12,74 @@ export default {
         body: ['var(--font-body)', 'Inter', 'sans-serif'],
       },
       colors: {
-        'nv-terracotta': 'var(--nv-terracotta)',
-        'nv-saffron': 'var(--nv-saffron)',
-        'nv-olive': 'var(--nv-olive)',
+        // Brand Colors
+        'nv-terracotta': {
+          DEFAULT: 'var(--nv-terracotta)',
+          light: 'var(--nv-terracotta-light)',
+          dark: 'var(--nv-terracotta-dark)',
+        },
+        'nv-saffron': {
+          DEFAULT: 'var(--nv-saffron)',
+          light: 'var(--nv-saffron-light)',
+          dark: 'var(--nv-saffron-dark)',
+        },
+        'nv-olive': {
+          DEFAULT: 'var(--nv-olive)',
+          light: 'var(--nv-olive-light)',
+          dark: 'var(--nv-olive-dark)',
+        },
         'nv-night': 'var(--nv-night)',
-        'nv-sand': 'var(--nv-sand)',
-        'nv-paper': 'var(--nv-paper)',
-        'nv-gold': 'var(--nv-gold)',
+        'nv-sand': {
+          DEFAULT: 'var(--nv-sand)',
+          light: 'var(--nv-sand-light)',
+        },
+        'nv-paper': {
+          DEFAULT: 'var(--nv-paper)',
+          warm: 'var(--nv-paper-warm)',
+        },
+        'nv-gold': {
+          DEFAULT: 'var(--nv-gold)',
+          light: 'var(--nv-gold-light)',
+          dark: 'var(--nv-gold-dark)',
+        },
+        'nv-cream': 'var(--nv-cream)',
+        'nv-rust': 'var(--nv-rust)',
+        'nv-forest': 'var(--nv-forest)',
         
         // Semantic colors
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        accent: 'var(--color-accent)',
-        surface: 'var(--color-surface)',
-        border: 'var(--color-border)',
+        primary: {
+          DEFAULT: 'var(--color-primary)',
+          hover: 'var(--color-primary-hover)',
+          pressed: 'var(--color-primary-pressed)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-secondary)',
+          hover: 'var(--color-secondary-hover)',
+          pressed: 'var(--color-secondary-pressed)',
+        },
+        accent: {
+          DEFAULT: 'var(--color-accent)',
+          hover: 'var(--color-accent-hover)',
+          pressed: 'var(--color-accent-pressed)',
+        },
+        surface: {
+          DEFAULT: 'var(--color-surface)',
+          elevated: 'var(--color-surface-elevated)',
+        },
+        border: {
+          DEFAULT: 'var(--color-border)',
+          strong: 'var(--color-border-strong)',
+        },
+        divider: 'var(--color-divider)',
+        text: {
+          DEFAULT: 'var(--color-text)',
+          muted: 'var(--color-text-muted)',
+          subtle: 'var(--color-text-subtle)',
+        },
+        background: {
+          DEFAULT: 'var(--color-background)',
+          warm: 'var(--color-background-warm)',
+        },
       },
       spacing: {
         'section': 'var(--space-section)',
@@ -40,12 +94,16 @@ export default {
         '2xl': 'var(--radius-2xl)',
       },
       boxShadow: {
+        'xs': 'var(--shadow-xs)',
         'sm': 'var(--shadow-sm)',
         'md': 'var(--shadow-md)',
         'lg': 'var(--shadow-lg)',
         'xl': 'var(--shadow-xl)',
-        'warm': '0 10px 25px -5px rgba(180, 83, 42, 0.1), 0 4px 6px -2px rgba(180, 83, 42, 0.05)',
-        'gold': '0 4px 14px 0 rgba(193, 163, 91, 0.3)',
+        '2xl': 'var(--shadow-2xl)',
+        'inner': 'var(--shadow-inner)',
+        'glow': 'var(--shadow-glow)',
+        'warm': 'var(--shadow-warm)',
+        'none': 'none',
       },
       container: {
         center: true,

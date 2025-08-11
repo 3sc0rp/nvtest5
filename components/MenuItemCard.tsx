@@ -32,154 +32,228 @@ export default function MenuItemCard({ item, index = 0 }: MenuItemCardProps) {
   const isPopular = item.popularity >= 8;
   const isMostPopular = item.popularity >= 9;
 
-  // Dietary badges
+  // Enhanced dietary badges with better styling
   const dietaryBadges = [
-    item.vegetarian ? { label: 'V', title: 'Vegetarian', color: 'bg-green-100 text-green-800' } : null,
-    item.vegan ? { label: 'VG', title: 'Vegan', color: 'bg-green-100 text-green-800' } : null,
-    item.halal ? { label: 'H', title: 'Halal', color: 'bg-blue-100 text-blue-800' } : null,
-  ].filter((badge): badge is { label: string; title: string; color: string } => badge !== null);
+    item.vegetarian ? { 
+      label: 'V', 
+      title: 'Vegetarian', 
+      color: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      icon: '🌱'
+    } : null,
+    item.vegan ? { 
+      label: 'VG', 
+      title: 'Vegan', 
+      color: 'bg-green-100 text-green-700 border-green-200',
+      icon: '🌿'
+    } : null,
+    item.halal ? { 
+      label: 'H', 
+      title: 'Halal', 
+      color: 'bg-blue-100 text-blue-700 border-blue-200',
+      icon: '☪️'
+    } : null,
+  ].filter((badge): badge is { label: string; title: string; color: string; icon: string } => badge !== null);
 
-  // Spice level indicators
+  // Enhanced spice level indicators
   const spiceChilis = Array.from({ length: 3 }, (_, i) => (
-    <svg
+    <motion.svg
       key={i}
       className={clsx(
-        'w-3 h-3',
-        i < item.spiceLevel ? 'text-red-500' : 'text-gray-300'
+        'w-4 h-4 transition-all duration-300',
+        i < item.spiceLevel 
+          ? 'text-red-500 drop-shadow-sm' 
+          : 'text-gray-300'
       )}
       fill="currentColor"
       viewBox="0 0 20 20"
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 0.1 + i * 0.1 }}
+      whileHover={{ 
+        scale: i < item.spiceLevel ? 1.2 : 1,
+        transition: { duration: 0.2 }
+      }}
     >
-      <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 6a3 3 0 11-6 0 3 3 0 016 0zM3 6a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
+      <path d="M10 2C8.5 2 7.3 3.2 7.3 4.7c0 .8.3 1.5.8 2L5.5 9.3c-.5.5-.8 1.2-.8 2 0 1.5 1.2 2.7 2.7 2.7.8 0 1.5-.3 2-.8l2.6-2.6c.5.5 1.2.8 2 .8 1.5 0 2.7-1.2 2.7-2.7 0-.8-.3-1.5-.8-2L12.7 6.7c.5-.5.8-1.2.8-2C13.5 3.2 12.3 2 10.8 2H10z" />
+    </motion.svg>
   ));
 
   return (
-    <motion.div
-      className="menu-card card-elevated group relative overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true, margin: '-50px' }}
-      whileHover={{ y: -4 }}
+    <motion.article
+      className="group relative bg-surface-elevated rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/30"
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.15,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
+      viewport={{ once: true, margin: '-80px' }}
+      whileHover={{ 
+        y: -8, 
+        scale: 1.02,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
     >
+      {/* Decorative top border gradient */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
       {/* Most Popular Ribbon */}
       {isMostPopular && (
-        <div className="absolute top-0 right-0 z-10">
-          <div className="bg-nv-gold text-nv-night text-xs font-bold px-3 py-1 transform rotate-45 translate-x-6 translate-y-2 shadow-md">
-            Most Popular
+        <motion.div 
+          className="absolute -top-2 -right-2 z-20"
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="bg-gradient-to-r from-nv-gold to-nv-saffron text-nv-night text-xs font-bold px-4 py-2 rounded-full shadow-glow border border-nv-gold-light/30">
+            ⭐ Most Popular
           </div>
-        </div>
+        </motion.div>
       )}
 
-      {/* Image */}
-      <div className="relative h-48 overflow-hidden">
+      {/* Seasonal Badge */}
+      {item.seasonal && (
+        <motion.div 
+          className="absolute top-4 left-4 z-10"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+        >
+          <div className="bg-accent/90 text-nv-paper text-xs font-semibold px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm border border-accent-hover/20">
+            🍂 Seasonal
+          </div>
+        </motion.div>
+      )}
+
+      {/* Image Container */}
+      <div className="relative h-52 overflow-hidden rounded-t-3xl group-hover:scale-105 transition-transform duration-700">
         <Image
           src={item.image}
           alt={item.name.en}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-all duration-700 group-hover:brightness-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
-        {/* Image Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-nv-night/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Image Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-nv-night/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
-        {/* Featured Badge */}
-        {item.featured && (
-          <div className="absolute top-3 left-3">
-            <span className="bg-nv-terracotta text-nv-paper text-xs font-semibold px-2 py-1 rounded-full">
-              Featured
-            </span>
-          </div>
-        )}
-
-        {/* Price Badge */}
-        <div className="absolute top-3 right-3">
-          <span className="price-badge">
+        {/* Floating Price Badge */}
+        <motion.div 
+          className="absolute bottom-4 right-4"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div className="bg-gradient-to-r from-nv-gold to-nv-gold-light text-nv-night font-bold text-lg px-4 py-2 rounded-2xl shadow-glow border border-nv-gold/30 backdrop-blur-sm">
             ${item.price.toFixed(2)}
-          </span>
-        </div>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Content */}
-      <div className="p-6">
-        {/* Header */}
-        <div className="mb-3">
-          <h3 className="font-heading text-xl font-semibold text-nv-night mb-1 line-clamp-1">
-            {item.name.en}
-          </h3>
-          
-          {/* Meta Info */}
-          <div className="flex items-center justify-between text-sm text-nv-olive">
-            <span className="flex items-center gap-1">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-              </svg>
-              {item.prepTime}
-            </span>
+      {/* Content Container */}
+      <div className="p-6 space-y-4">
+        {/* Title and Tags Row */}
+        <div className="space-y-3">
+          <div className="flex items-start justify-between gap-3">
+            <motion.h3 
+              className="font-heading text-xl font-bold text-text-DEFAULT line-clamp-2 group-hover:text-primary transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              {item.name.en}
+            </motion.h3>
             
-            <span className="flex items-center gap-1">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              {item.popularity.toFixed(1)}
-            </span>
+            {/* Spice Level */}
+            {item.spiceLevel > 0 && (
+              <div className="flex items-center gap-1 p-2 bg-red-50 rounded-xl border border-red-200/50">
+                <span className="text-xs font-medium text-red-700 mr-1">Heat:</span>
+                {spiceChilis}
+              </div>
+            )}
           </div>
+
+          {/* Description */}
+          <p className="text-text-muted text-sm leading-relaxed line-clamp-2 group-hover:text-text-DEFAULT transition-colors duration-300">
+            {item.description.en}
+          </p>
         </div>
 
-        {/* Description */}
-        <p className="font-body text-nv-olive text-sm leading-relaxed mb-4 line-clamp-2">
-          {item.description.en}
-        </p>
-
-        {/* Tags and Badges */}
-        <div className="flex items-center justify-between">
+        {/* Badges Row */}
+        <div className="flex items-center gap-2 flex-wrap">
           {/* Dietary Badges */}
-          <div className="flex items-center gap-2">
-            {dietaryBadges.map((badge, i) => (
-              <span
-                key={i}
-                className={clsx(
-                  'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium',
-                  badge.color
-                )}
-                title={badge.title}
-              >
-                {badge.label}
-              </span>
-            ))}
-          </div>
+          {dietaryBadges.map((badge) => (
+            <motion.span
+              key={badge.label}
+              className={clsx(
+                "inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold border",
+                badge.color
+              )}
+              title={badge.title}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="text-xs">{badge.icon}</span>
+              {badge.label}
+            </motion.span>
+          ))}
 
-          {/* Spice Level */}
-          {item.spiceLevel > 0 && (
-            <div className="flex items-center gap-1" title={`Spice level: ${item.spiceLevel}/3`}>
-              {spiceChilis}
-            </div>
+          {/* Popular Badge */}
+          {isPopular && !isMostPopular && (
+            <motion.span
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-nv-saffron/10 text-nv-saffron-dark border border-nv-saffron/20"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              🔥 Popular
+            </motion.span>
           )}
         </div>
 
-        {/* Tags */}
-        {item.tags.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-nv-sand/50">
-            <div className="flex flex-wrap gap-1">
-              {item.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-block bg-nv-sand/50 text-nv-olive text-xs px-2 py-1 rounded-md capitalize"
-                >
-                  {tag.replace('-', ' ')}
-                </span>
-              ))}
-              {item.tags.length > 3 && (
-                <span className="text-xs text-nv-olive/70">
-                  +{item.tags.length - 3} more
-                </span>
-              )}
-            </div>
+        {/* Footer Info */}
+        <div className="flex items-center justify-between pt-2 border-t border-border/50">
+          <div className="flex items-center gap-4 text-xs text-text-subtle">
+            <span className="flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {item.prepTime}
+            </span>
+            <span className="flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              {item.calories} cal
+            </span>
           </div>
-        )}
+
+          {/* Popularity Stars */}
+          <div className="flex items-center gap-1">
+            {Array.from({ length: 5 }, (_, i) => (
+              <motion.svg
+                key={i}
+                className={clsx(
+                  'w-3 h-3 transition-colors duration-300',
+                  i < Math.floor(item.popularity / 2) 
+                    ? 'text-nv-gold' 
+                    : 'text-gray-300'
+                )}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.5 + i * 0.1, duration: 0.3 }}
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </motion.svg>
+            ))}
+          </div>
+        </div>
       </div>
-    </motion.div>
+
+      {/* Hover Overlay Effect */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    </motion.article>
   );
 }

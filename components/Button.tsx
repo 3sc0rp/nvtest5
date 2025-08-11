@@ -3,18 +3,25 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-lg font-body font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed',
+  'group inline-flex items-center justify-center gap-2 rounded-xl font-body font-semibold transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none',
   {
     variants: {
       variant: {
-        primary: 'bg-nv-terracotta text-nv-paper hover:bg-nv-terracotta/90 focus:ring-nv-terracotta',
-        secondary: 'bg-nv-olive text-nv-paper hover:bg-nv-olive/90 focus:ring-nv-olive',
-        ghost: 'border-2 border-nv-olive text-nv-olive hover:bg-nv-olive hover:text-nv-paper focus:ring-nv-olive',
+        primary: 'bg-primary text-nv-paper hover:bg-primary-hover active:bg-primary-pressed focus:ring-primary/30 shadow-warm hover:shadow-xl transform hover:-translate-y-0.5',
+        secondary: 'bg-secondary text-nv-paper hover:bg-secondary-hover active:bg-secondary-pressed focus:ring-secondary/30 shadow-md hover:shadow-lg transform hover:-translate-y-0.5',
+        accent: 'bg-accent text-nv-paper hover:bg-accent-hover active:bg-accent-pressed focus:ring-accent/30 shadow-md hover:shadow-lg transform hover:-translate-y-0.5',
+        outline: 'border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-nv-paper focus:ring-primary/30 shadow-sm hover:shadow-md',
+        ghost: 'text-primary bg-transparent hover:bg-primary/10 active:bg-primary/20 focus:ring-primary/30',
+        soft: 'bg-primary/10 text-primary hover:bg-primary/20 active:bg-primary/30 focus:ring-primary/30',
+        gold: 'bg-gradient-to-r from-nv-gold to-nv-gold-light text-nv-night hover:from-nv-gold-light hover:to-nv-gold shadow-glow hover:shadow-xl transform hover:-translate-y-0.5',
+        danger: 'bg-nv-rust text-nv-paper hover:bg-nv-rust/90 focus:ring-nv-rust/30 shadow-md hover:shadow-lg',
       },
       size: {
-        sm: 'text-sm px-3 py-2',
-        md: 'text-sm px-4 py-2.5',
-        lg: 'text-base px-6 py-3'
+        xs: 'text-xs px-2.5 py-1.5 rounded-lg',
+        sm: 'text-sm px-3.5 py-2 rounded-lg',
+        md: 'text-sm px-5 py-2.5 rounded-xl',
+        lg: 'text-base px-6 py-3 rounded-xl',
+        xl: 'text-lg px-8 py-4 rounded-2xl',
       },
       fullWidth: {
         true: 'w-full',
@@ -78,12 +85,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               aria-hidden="true"
             >
               <circle 
-                className="opacity-25" 
+                className="opacity-20" 
                 cx="12" 
                 cy="12" 
                 r="10" 
                 stroke="currentColor" 
-                strokeWidth="4"
+                strokeWidth="3"
               />
               <path 
                 className="opacity-75" 
@@ -92,13 +99,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               />
             </svg>
             <span className="sr-only">{loadingText}</span>
-            <span aria-hidden="true">{loadingText}</span>
+            <span aria-hidden="true" className="animate-pulse">{loadingText}</span>
           </>
         ) : (
           <>
-            {leftIcon && <span aria-hidden="true">{leftIcon}</span>}
-            <span>{children}</span>
-            {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
+            {leftIcon && (
+              <span aria-hidden="true" className="transition-transform duration-200 ease-out group-hover:scale-110">
+                {leftIcon}
+              </span>
+            )}
+            <span className="relative">
+              {children}
+            </span>
+            {rightIcon && (
+              <span aria-hidden="true" className="transition-transform duration-200 ease-out group-hover:scale-110 group-hover:translate-x-0.5">
+                {rightIcon}
+              </span>
+            )}
           </>
         )}
       </Component>
