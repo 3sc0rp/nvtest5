@@ -1,0 +1,116 @@
+# Page snapshot
+
+```yaml
+- link "Skip to main content":
+  - /url: "#main-content"
+- banner:
+  - navigation "Main":
+    - link "Nature Village Kurdish Cuisine":
+      - /url: /
+    - button "Menu"
+- main:
+  - heading "Contact Us" [level=2]
+  - paragraph: We're here to serve you with authentic Kurdish cuisine and warm hospitality. Reach out with any questions or special requests.
+  - img
+  - heading "Phone" [level=3]
+  - link "(555) 123-4567":
+    - /url: tel:+15551234567
+  - paragraph: Call for reservations, takeout orders, or any questions about our menu and services.
+  - img
+  - heading "Email" [level=3]
+  - link "info@naturevillage.com":
+    - /url: mailto:info@naturevillage.com
+  - paragraph: Send us an email for catering inquiries, private events, or general feedback.
+  - img
+  - heading "Location" [level=3]
+  - text: 123 Village Street Downtown Village District City, State 12345
+  - paragraph: Located in the heart of the Village District with free parking available.
+  - link "Get Directions":
+    - /url: https://maps.google.com/?q=123+Village+Street+City+State+12345
+    - img
+    - text: Get Directions
+  - heading "Send us a message" [level=3]
+  - text: Name
+  - textbox "Name"
+  - text: Email
+  - textbox "Email"
+  - text: Message
+  - textbox "Message"
+  - button "Send Message"
+  - heading "Hours of Operation" [level=3]
+  - text: Monday 11:00 AM - 10:00 PM Tuesday 11:00 AM - 10:00 PM Wednesday 11:00 AM - 10:00 PM Thursday 11:00 AM - 10:00 PM Friday 11:00 AM - 11:00 PM Saturday 11:00 AM - 11:00 PM Sunday 12:00 PM - 9:00 PM
+  - paragraph:
+    - strong: "Holiday Hours:"
+    - text: Please call ahead during holidays as hours may vary.
+  - heading "Quick Actions" [level=3]
+  - link "Make a Reservation":
+    - /url: /reservations
+  - link "Order for Pickup/Delivery":
+    - /url: /order
+  - link "View Menu":
+    - /url: /menu
+  - heading "Special Services" [level=3]
+  - img
+  - heading "Private Events" [level=4]
+  - paragraph: Birthdays, anniversaries, corporate gatherings
+  - img
+  - heading "Catering" [level=4]
+  - paragraph: Authentic Kurdish cuisine for your events
+  - img
+  - heading "Gift Cards" [level=4]
+  - paragraph: Share the gift of authentic Kurdish cuisine
+  - heading "Find Us" [level=2]
+  - img
+  - heading "Interactive Map" [level=3]
+  - paragraph: 123 Village Street, Downtown Village District
+  - link "Open in Google Maps":
+    - /url: https://maps.google.com/?q=123+Village+Street+City+State+12345
+- contentinfo:
+  - text: NV Nature Village Kurdish Restaurant
+  - paragraph: Experience authentic Kurdish cuisine in a warm, welcoming atmosphere.
+  - link "123 Kurdish Way, Village City, ST 12345":
+    - /url: https://maps.google.com
+  - link "+1 (555) 123‑4567":
+    - /url: tel:+15551234567
+  - link "info@naturevillage.com":
+    - /url: mailto:info@naturevillage.com
+  - heading "Business Hours" [level=3]
+  - list:
+    - listitem: Monday - Thursday 11:00 AM - 10:00 PM
+    - listitem: Friday - Saturday 11:00 AM - 11:00 PM
+    - listitem: Sunday 12:00 PM - 9:00 PM
+  - heading "Quick Links" [level=3]
+  - navigation:
+    - link "Our Menu":
+      - /url: /menu
+    - link "Make Reservation":
+      - /url: /reservations
+    - link "Order Online":
+      - /url: /order
+    - link "About Us":
+      - /url: /about
+    - link "Gallery":
+      - /url: /gallery
+    - link "Contact":
+      - /url: /contact
+  - heading "Follow Us" [level=4]
+  - link "Facebook":
+    - /url: https://facebook.com/naturevillage
+  - link "Instagram":
+    - /url: https://instagram.com/naturevillage
+  - link "Twitter":
+    - /url: https://twitter.com/naturevillage
+  - link "Yelp":
+    - /url: https://yelp.com/biz/nature-village
+  - heading "Stay Updated" [level=3]
+  - paragraph: Subscribe for offers, events, and menu updates.
+  - textbox "Enter your email"
+  - button "Subscribe"
+  - text: © 2025 Nature Village Restaurant. All rights reserved.
+  - link "Privacy Policy":
+    - /url: /privacy
+  - link "Terms of Service":
+    - /url: /terms
+  - link "Accessibility":
+    - /url: /accessibility
+```

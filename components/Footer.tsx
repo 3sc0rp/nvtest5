@@ -45,7 +45,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-nv-ink text-nv-paper relative overflow-hidden">
+    <footer role="contentinfo" className="bg-nv-night text-nv-paper relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <Image src={getPatternPath('sunRays')} alt="" fill className="object-cover" />
       </div>
@@ -106,7 +106,7 @@ export default function Footer() {
           {/* Links + Social */}
           <div className="space-y-6">
             <h3 className="font-heading text-lg font-semibold text-nv-saffron">Quick Links</h3>
-            <nav className="grid grid-cols-2 lg:grid-cols-1 gap-3" aria-label="Footer links">
+            <nav className="grid grid-cols-2 lg:grid-cols-1 gap-3">
               {quickLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="font-body text-sm text-nv-sand hover:text-nv-saffron flex items-center gap-2">
                   <span className="text-nv-terracotta" aria-hidden>→</span>

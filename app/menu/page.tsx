@@ -54,7 +54,7 @@ export default function MenuPage() {
       <div className="bg-gradient-to-br from-nv-sand to-nv-paper py-16 border-b border-nv-sand/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-nv-night mb-4">
-            Our Menu
+            Menu
           </h1>
           <p className="font-body text-xl text-nv-olive max-w-3xl mx-auto leading-relaxed">
             Discover authentic Kurdish cuisine crafted with traditional recipes and the finest ingredients from the Zagros Mountains.

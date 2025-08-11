@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Order Links with Environment Variables', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/en/order');
+    await page.goto('/order');
   });
 
   test('should render order page correctly', async ({ page }) => {
     // Check order page loads
-    await expect(page.getByRole('heading', { name: /order/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Order', exact: true })).toBeVisible();
 
     // Check order options are displayed
     const orderOptions = page.locator('[data-testid="order-option"], a:has-text("DoorDash"), a:has-text("Uber Eats")');
@@ -127,7 +127,7 @@ test.describe('Order Links with Environment Variables', () => {
     const loadingIndicators = page.locator('.loading, .spinner, :text("Loading")');
     
     // Page should eventually show content (no perpetual loading)
-    await expect(page.getByRole('heading', { name: /order/i })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('heading', { name: 'Order', exact: true })).toBeVisible({ timeout: 10000 });
   });
 
   test('should handle network errors gracefully', async ({ page }) => {
@@ -139,7 +139,7 @@ test.describe('Order Links with Environment Variables', () => {
     
     // Page should still load and show some content
     await expect(page.locator('body')).toBeVisible();
-    await expect(page.getByRole('heading', { name: /order/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Order', exact: true })).toBeVisible();
   });
 
   test('should track order link clicks', async ({ page, context }) => {

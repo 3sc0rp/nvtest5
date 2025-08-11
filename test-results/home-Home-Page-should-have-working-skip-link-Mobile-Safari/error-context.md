@@ -1,0 +1,278 @@
+# Page snapshot
+
+```yaml
+- link "Skip to main content":
+  - /url: "#main-content"
+- banner:
+  - navigation "Main":
+    - link "Nature Village Kurdish Cuisine":
+      - /url: /
+    - button "Menu"
+- main:
+  - main:
+    - banner:
+      - img "Mountains hero image"
+      - heading "Kurdish flavors from the Zagros" [level=1]
+      - paragraph: Fire-grilled meats, village breads, and family recipes passed down for generations.
+      - link "Reserve a Table":
+        - /url: /reservations
+      - link "Order Delivery":
+        - /url: /order
+      - link "View Menu":
+        - /url: /menu
+      - img
+      - paragraph: Open Daily
+      - paragraph: 11am - 10pm
+      - img
+      - link "(555) 123-4567":
+        - /url: tel:+15551234567
+      - paragraph: Call for reservations
+      - img
+      - paragraph: Location
+      - paragraph: Downtown Village District
+    - heading "Signature Dishes" [level=2]
+    - paragraph: Discover our most beloved recipes, each dish crafted with traditional methods and the finest ingredients from the Zagros highlands.
+    - img "Zagros Mountain Kofta"
+    - img
+    - text: Featured Dish
+    - heading "Zagros Mountain Kofta" [level=3]
+    - paragraph: Traditional Kurdish meatballs with aromatic spices, served with basmati rice and fresh herbs from the Zagros highlands.
+    - text: $18.95
+    - img
+    - text: 25 mins
+    - img
+    - img
+    - img
+    - link "View Full Menu":
+      - /url: /menu
+    - button "Previous dish":
+      - img
+    - button "Next dish":
+      - img
+    - button "Go to slide 1"
+    - button "Go to slide 2"
+    - button "Go to slide 3"
+    - button "Go to slide 4"
+    - button "Go to slide 5"
+    - button "Go to slide 6"
+    - heading "Flavors Born in the Mountains" [level=2]
+    - paragraph: Every recipe tells a story of tradition, family, and the rich culinary heritage of Kurdistan.
+    - heading "From Kurdistan's Heart to Your Table" [level=3]
+    - paragraph: For generations, our family has preserved the authentic flavors of Kurdish cuisine. Each dish tells a story of the Zagros Mountains, where aromatic herbs grow wild and traditional cooking methods have been passed down through the ages.
+    - paragraph: Our chefs honor these time-tested recipes while creating a warm, modern atmosphere where every guest feels like family. Experience the hospitality and rich flavors that define Kurdish culture.
+    - img
+    - heading "Family Recipes" [level=4]
+    - paragraph: Passed down for generations
+    - img
+    - heading "Fire & Flavor" [level=4]
+    - paragraph: Traditional charcoal grilling
+    - img
+    - heading "Halal Certified" [level=4]
+    - paragraph: 100% halal ingredients
+    - img
+    - heading "Made with Love" [level=4]
+    - paragraph: Kurdish hospitality
+    - link "Our Story":
+      - /url: /about
+    - img "Traditional Kurdish restaurant interior with warm lighting and mosaic details"
+    - img
+    - paragraph: “Every meal feels like coming home to family.”
+    - paragraph: — Sarah M.
+    - heading "What Our Guests Say" [level=2]
+    - paragraph: Hear from the families and food lovers who have made Nature Village part of their culinary journey.
+    - article:
+      - text: ⭐ Featured Review
+      - img
+      - blockquote:
+        - paragraph: “The most authentic Kurdish food I've had outside of Kurdistan. Every bite takes me back to my grandmother's kitchen.”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 A
+      - heading "Amara Hassan" [level=4]
+      - img
+      - text: Erbil, Kurdistan
+      - time: Jan 14, 2024
+      - img
+      - text: Verified Customer
+    - article:
+      - img
+      - blockquote:
+        - paragraph: “The kebabs are perfectly seasoned and grilled to perfection. The service makes you feel like family.”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 M
+      - heading "Michael Chen" [level=4]
+      - img
+      - text: San Francisco, CA
+      - time: Jan 19, 2024
+      - img
+      - text: Verified Customer
+    - article:
+      - img
+      - blockquote:
+        - paragraph: “Outstanding vegetarian options! The dolma and fresh bread are incredible. Highly recommend!”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 S
+      - heading "Sarah Rodriguez" [level=4]
+      - img
+      - text: Los Angeles, CA
+      - time: Jan 24, 2024
+      - img
+      - text: Verified Customer
+    - article:
+      - img
+      - blockquote:
+        - paragraph: “A hidden gem! The atmosphere is warm and inviting, and the flavors are absolutely divine.”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 D
+      - heading "David Park" [level=4]
+      - img
+      - text: Seattle, WA
+      - time: Jan 31, 2024
+      - img
+      - text: Verified Customer
+    - article:
+      - img
+      - blockquote:
+        - paragraph: “This place captures the essence of Kurdish hospitality. The mountain honey baklava is out of this world!”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 E
+      - heading "Elena Kowalski" [level=4]
+      - img
+      - text: Portland, OR
+      - time: Feb 4, 2024
+      - img
+      - text: Verified Customer
+    - article:
+      - img
+      - blockquote:
+        - paragraph: “Fresh ingredients, bold flavors, and genuine care in every dish. This is what authentic cuisine should be.”
+      - img
+      - img
+      - img
+      - img
+      - img
+      - text: 5/5 J
+      - heading "James Thompson" [level=4]
+      - img
+      - text: Denver, CO
+      - time: Feb 9, 2024
+      - img
+      - text: Verified Customer
+    - heading "Visit Nature Village" [level=2]
+    - paragraph: We're located in the heart of the city, ready to welcome you with Kurdish hospitality.
+    - img
+    - heading "Hours" [level=3]
+    - text: Monday 11:00 AM - 10:00 PM Tuesday 11:00 AM - 10:00 PM Wednesday 11:00 AM - 10:00 PM Thursday 11:00 AM - 10:00 PM Friday 11:00 AM - 11:00 PM Saturday 11:00 AM - 11:00 PM Sunday 12:00 PM - 9:00 PM
+    - img
+    - heading "Contact" [level=3]
+    - paragraph: Phone
+    - link "(555) 123-4567":
+      - /url: tel:+15551234567
+    - paragraph: Email
+    - link "info@naturevillage.com":
+      - /url: mailto:info@naturevillage.com
+    - img
+    - heading "Location" [level=3]
+    - paragraph: 123 Village Street
+    - paragraph: Downtown Village District
+    - paragraph: City, State 12345
+    - link "Get Directions":
+      - /url: https://maps.google.com/?q=123+Village+Street+City+State+12345
+      - img
+      - text: Get Directions
+    - img
+    - text: Free Parking
+    - img
+    - text: Halal
+    - heading "Stay Connected" [level=2]
+    - paragraph: Be the first to know about new dishes, special events, and exclusive offers.
+    - heading "Stay Connected" [level=2]
+    - paragraph: Be the first to know about new dishes, special events, and the latest from our Nature Village community
+    - text: Email Address *
+    - textbox "Email Address *"
+    - text: ✉️ First Name *
+    - textbox "First Name *"
+    - text: 👤
+    - button "Newsletter Preferences ▼"
+    - checkbox "I agree to receive newsletters and accept the terms of service"
+    - text: I agree to receive newsletters and accept the terms of service
+    - button "📧 Subscribe Now" [disabled]
+    - paragraph: Your information is secure and will never be shared.
+    - text: 🎁
+    - heading "Welcome Gift" [level=3]
+    - paragraph: 10% off your first visit
+    - text: 📅
+    - heading "Exclusive Events" [level=3]
+    - paragraph: First to know about secret dinners
+    - text: 👨‍🍳
+    - heading "Recipe Secrets" [level=3]
+    - paragraph: Learn Kurdish cooking at home
+- contentinfo:
+  - text: NV Nature Village Kurdish Restaurant
+  - paragraph: Experience authentic Kurdish cuisine in a warm, welcoming atmosphere.
+  - link "123 Kurdish Way, Village City, ST 12345":
+    - /url: https://maps.google.com
+  - link "+1 (555) 123‑4567":
+    - /url: tel:+15551234567
+  - link "info@naturevillage.com":
+    - /url: mailto:info@naturevillage.com
+  - heading "Business Hours" [level=3]
+  - list:
+    - listitem: Monday - Thursday 11:00 AM - 10:00 PM
+    - listitem: Friday - Saturday 11:00 AM - 11:00 PM
+    - listitem: Sunday 12:00 PM - 9:00 PM
+  - heading "Quick Links" [level=3]
+  - navigation:
+    - link "Our Menu":
+      - /url: /menu
+    - link "Make Reservation":
+      - /url: /reservations
+    - link "Order Online":
+      - /url: /order
+    - link "About Us":
+      - /url: /about
+    - link "Gallery":
+      - /url: /gallery
+    - link "Contact":
+      - /url: /contact
+  - heading "Follow Us" [level=4]
+  - link "Facebook":
+    - /url: https://facebook.com/naturevillage
+  - link "Instagram":
+    - /url: https://instagram.com/naturevillage
+  - link "Twitter":
+    - /url: https://twitter.com/naturevillage
+  - link "Yelp":
+    - /url: https://yelp.com/biz/nature-village
+  - heading "Stay Updated" [level=3]
+  - paragraph: Subscribe for offers, events, and menu updates.
+  - textbox "Enter your email"
+  - button "Subscribe"
+  - text: © 2025 Nature Village Restaurant. All rights reserved.
+  - link "Privacy Policy":
+    - /url: /privacy
+  - link "Terms of Service":
+    - /url: /terms
+  - link "Accessibility":
+    - /url: /accessibility
+- alert
+```

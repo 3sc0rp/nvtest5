@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Menu Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/en/menu');
+    await page.goto('/menu');
   });
 
   test('should render menu page correctly', async ({ page }) => {
@@ -25,9 +25,13 @@ test.describe('Menu Page', () => {
     const initialItemCount = await page.locator('[data-testid="menu-item"]').count();
     expect(initialItemCount).toBeGreaterThan(0);
 
+    // Wait for page to be fully loaded
+    await page.waitForLoadState('networkidle');
+
     // Click on a category filter (e.g., appetizers)
     const categoryFilter = page.locator('[data-testid="category-filter"]').first();
-    await categoryFilter.click();
+    await categoryFilter.waitFor({ state: 'visible' });
+    await categoryFilter.click({ force: true });
 
     // Wait for filter to apply
     await page.waitForTimeout(500);
@@ -59,12 +63,16 @@ test.describe('Menu Page', () => {
   });
 
   test('should show/hide dietary filters', async ({ page }) => {
+    // Wait for page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Look for dietary filters (vegetarian, vegan, halal, etc.)
     const dietaryFilters = page.locator('[data-testid*="filter"], button:has-text("Vegetarian"), button:has-text("Vegan"), button:has-text("Halal")');
     
     if (await dietaryFilters.count() > 0) {
       const firstFilter = dietaryFilters.first();
-      await firstFilter.click();
+      await firstFilter.waitFor({ state: 'visible' });
+      await firstFilter.click({ force: true });
 
       // Wait for filter to apply
       await page.waitForTimeout(500);
@@ -130,7 +138,7 @@ test.describe('Menu Page', () => {
       });
     });
 
-    await page.goto('/en/menu');
+    await page.goto('/menu');
 
     // Check for loading indicators
     const loadingIndicators = page.locator('[data-testid="loading"], .animate-pulse, :text("Loading")');

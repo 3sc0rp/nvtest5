@@ -24,7 +24,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section role="banner" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -32,7 +32,7 @@ export default function Hero() {
       >
         <Image
           src="/images/hero-mountains.jpg"
-          alt="Zagros Mountains landscape"
+          alt="Mountains hero image"
           fill
           priority
           className="object-cover object-center"

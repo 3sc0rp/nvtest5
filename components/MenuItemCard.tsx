@@ -26,9 +26,10 @@ interface MenuItem {
 interface MenuItemCardProps {
   item: MenuItem;
   index?: number;
+  onClick?: (item: MenuItem) => void;
 }
 
-export default function MenuItemCard({ item, index = 0 }: MenuItemCardProps) {
+export default function MenuItemCard({ item, index = 0, onClick }: MenuItemCardProps) {
   const isPopular = item.popularity >= 8;
   const isMostPopular = item.popularity >= 9;
 
@@ -78,8 +79,21 @@ export default function MenuItemCard({ item, index = 0 }: MenuItemCardProps) {
     </motion.svg>
   ));
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!onClick) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick(item);
+    }
+  };
+
   return (
     <motion.article
+      data-testid="menu-item"
+      role="button"
+      tabIndex={0}
+      onClick={() => onClick?.(item)}
+      onKeyDown={handleKeyDown}
       className="group relative bg-surface-elevated rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/30"
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}

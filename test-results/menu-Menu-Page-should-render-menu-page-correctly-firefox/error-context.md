@@ -1,0 +1,305 @@
+# Page snapshot
+
+```yaml
+- link "Skip to main content":
+  - /url: "#main-content"
+- banner:
+  - navigation "Main":
+    - link "Nature Village Kurdish Cuisine":
+      - /url: /
+    - button "Menu"
+- main:
+  - heading "Menu" [level=1]
+  - paragraph: Discover authentic Kurdish cuisine crafted with traditional recipes and the finest ingredients from the Zagros Mountains.
+  - img
+  - text: 100% Halal
+  - img
+  - text: Vegetarian Options
+  - img
+  - text: Fire Grilled
+  - textbox "Search dishes, ingredients, or flavors..."
+  - img
+  - button "All"
+  - button "Appetizers"
+  - button "Main Courses"
+  - button "Vegetarian"
+  - button "Desserts"
+  - button "Beverages"
+  - checkbox "Popular"
+  - text: Popular
+  - checkbox "Seasonal"
+  - text: Seasonal
+  - checkbox "Vegetarian Only"
+  - text: Vegetarian Only
+  - combobox:
+    - option "Sort by Popularity" [selected]
+    - option "Sort by Name"
+    - option "Sort by Price"
+  - paragraph: 12 dishes found
+  - 'button "⭐ Most Popular Kurdish Fire Kebab $24.95 Kurdish Fire Kebab Heat: Charcoal-grilled lamb skewers marinated in traditional Kurdish spices, served with grilled vegetables and lavash bread. ☪️ H 30 mins 520 cal"':
+    - text: ⭐ Most Popular
+    - img "Kurdish Fire Kebab"
+    - text: $24.95
+    - heading "Kurdish Fire Kebab" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Charcoal-grilled lamb skewers marinated in traditional Kurdish spices, served with grilled vegetables and lavash bread.
+    - text: ☪️ H
+    - img
+    - text: 30 mins
+    - img
+    - text: 520 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "⭐ Most Popular Zagros Mountain Kofta $18.95 Zagros Mountain Kofta Heat: Traditional Kurdish meatballs with aromatic spices, served with basmati rice and fresh herbs from the Zagros highlands. ☪️ H 25 mins 420 cal"':
+    - text: ⭐ Most Popular
+    - img "Zagros Mountain Kofta"
+    - text: $18.95
+    - heading "Zagros Mountain Kofta" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Traditional Kurdish meatballs with aromatic spices, served with basmati rice and fresh herbs from the Zagros highlands.
+    - text: ☪️ H
+    - img
+    - text: 25 mins
+    - img
+    - text: 420 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - button "⭐ Most Popular Traditional Kurdish Tea $4.95 Traditional Kurdish Tea Aromatic black tea blend served in traditional istikan glasses, accompanied by dates and Turkish delight. 🌱 V 🌿 VG ☪️ H 5 mins 45 cal":
+    - text: ⭐ Most Popular
+    - img "Traditional Kurdish Tea"
+    - text: $4.95
+    - heading "Traditional Kurdish Tea" [level=3]
+    - paragraph: Aromatic black tea blend served in traditional istikan glasses, accompanied by dates and Turkish delight.
+    - text: 🌱 V 🌿 VG ☪️ H
+    - img
+    - text: 5 mins
+    - img
+    - text: 45 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - button "Mountain Honey Baklava $8.95 Mountain Honey Baklava Delicate layers of phyllo pastry filled with chopped pistachios and walnuts, sweetened with pure mountain honey. 🌱 V ☪️ H 🔥 Popular 15 mins 320 cal":
+    - img "Mountain Honey Baklava"
+    - text: $8.95
+    - heading "Mountain Honey Baklava" [level=3]
+    - paragraph: Delicate layers of phyllo pastry filled with chopped pistachios and walnuts, sweetened with pure mountain honey.
+    - text: 🌱 V ☪️ H 🔥 Popular
+    - img
+    - text: 15 mins
+    - img
+    - text: 320 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "Traditional Kurdish Coffee $5.95 Traditional Kurdish Coffee Heat: Strong, aromatic coffee brewed with cardamom and served with traditional sweets and dried fruits. 🌱 V 🌿 VG ☪️ H 🔥 Popular 10 mins 25 cal"':
+    - img "Traditional Kurdish Coffee"
+    - text: $5.95
+    - heading "Traditional Kurdish Coffee" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Strong, aromatic coffee brewed with cardamom and served with traditional sweets and dried fruits.
+    - text: 🌱 V 🌿 VG ☪️ H 🔥 Popular
+    - img
+    - text: 10 mins
+    - img
+    - text: 25 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "Nature Village Dolma $14.95 Nature Village Dolma Heat: Hand-rolled grape leaves stuffed with seasoned rice, pine nuts, and fresh herbs, drizzled with pomegranate molasses. 🌱 V ☪️ H 🔥 Popular 20 mins 280 cal"':
+    - img "Nature Village Dolma"
+    - text: $14.95
+    - heading "Nature Village Dolma" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Hand-rolled grape leaves stuffed with seasoned rice, pine nuts, and fresh herbs, drizzled with pomegranate molasses.
+    - text: 🌱 V ☪️ H 🔥 Popular
+    - img
+    - text: 20 mins
+    - img
+    - text: 280 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "🍂 Seasonal Kurdish Shepherd''s Stew $21.95 Kurdish Shepherd''s Stew Heat: Hearty lamb and vegetable stew slow-cooked with Kurdish herbs and spices, served with traditional bread. ☪️ H 🔥 Popular 45 mins 480 cal"':
+    - text: 🍂 Seasonal
+    - img "Kurdish Shepherd's Stew"
+    - text: $21.95
+    - heading "Kurdish Shepherd's Stew" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Hearty lamb and vegetable stew slow-cooked with Kurdish herbs and spices, served with traditional bread.
+    - text: ☪️ H 🔥 Popular
+    - img
+    - text: 45 mins
+    - img
+    - text: 480 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - button "Rosewater Muhallabia $7.95 Rosewater Muhallabia Silky smooth milk pudding infused with rosewater and topped with crushed pistachios and rose petals. 🌱 V ☪️ H 🔥 Popular 10 mins 220 cal":
+    - img "Rosewater Muhallabia"
+    - text: $7.95
+    - heading "Rosewater Muhallabia" [level=3]
+    - paragraph: Silky smooth milk pudding infused with rosewater and topped with crushed pistachios and rose petals.
+    - text: 🌱 V ☪️ H 🔥 Popular
+    - img
+    - text: 10 mins
+    - img
+    - text: 220 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "Saffron Paradise Rice $12.95 Saffron Paradise Rice Heat: Fragrant basmati rice cooked with saffron, barberries, and almonds, a royal dish from Kurdish cuisine. 🌱 V 🌿 VG ☪️ H 🔥 Popular 20 mins 240 cal"':
+    - img "Saffron Paradise Rice"
+    - text: $12.95
+    - heading "Saffron Paradise Rice" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Fragrant basmati rice cooked with saffron, barberries, and almonds, a royal dish from Kurdish cuisine.
+    - text: 🌱 V 🌿 VG ☪️ H 🔥 Popular
+    - img
+    - text: 20 mins
+    - img
+    - text: 240 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "🍂 Seasonal Fiery Kurdish Lentil Soup $9.95 Fiery Kurdish Lentil Soup Heat: Red lentil soup with Kurdish peppers, cumin, and fresh herbs, served with lemon and crusty bread. 🌱 V 🌿 VG ☪️ H 🔥 Popular 20 mins 160 cal"':
+    - text: 🍂 Seasonal
+    - img "Fiery Kurdish Lentil Soup"
+    - text: $9.95
+    - heading "Fiery Kurdish Lentil Soup" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Red lentil soup with Kurdish peppers, cumin, and fresh herbs, served with lemon and crusty bread.
+    - text: 🌱 V 🌿 VG ☪️ H 🔥 Popular
+    - img
+    - text: 20 mins
+    - img
+    - text: 160 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - button "🍂 Seasonal Kurdish Pomegranate Salad $13.95 Kurdish Pomegranate Salad Fresh mixed greens with pomegranate seeds, walnuts, and Kurdish cheese, dressed with pomegranate molasses. 🌱 V ☪️ H 🔥 Popular 15 mins 180 cal":
+    - text: 🍂 Seasonal
+    - img "Kurdish Pomegranate Salad"
+    - text: $13.95
+    - heading "Kurdish Pomegranate Salad" [level=3]
+    - paragraph: Fresh mixed greens with pomegranate seeds, walnuts, and Kurdish cheese, dressed with pomegranate molasses.
+    - text: 🌱 V ☪️ H 🔥 Popular
+    - img
+    - text: 15 mins
+    - img
+    - text: 180 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+  - 'button "Mountain Herb Vegan Kufta $16.95 Mountain Herb Vegan Kufta Heat: Plant-based kufta made with lentils, bulgur, and mountain herbs, served with tahini sauce and fresh salad. 🌱 V 🌿 VG ☪️ H 25 mins 350 cal"':
+    - img "Mountain Herb Vegan Kufta"
+    - text: $16.95
+    - heading "Mountain Herb Vegan Kufta" [level=3]
+    - text: "Heat:"
+    - img
+    - img
+    - img
+    - paragraph: Plant-based kufta made with lentils, bulgur, and mountain herbs, served with tahini sauce and fresh salad.
+    - text: 🌱 V 🌿 VG ☪️ H
+    - img
+    - text: 25 mins
+    - img
+    - text: 350 cal
+    - img
+    - img
+    - img
+    - img
+    - img
+- contentinfo:
+  - text: NV Nature Village Kurdish Restaurant
+  - paragraph: Experience authentic Kurdish cuisine in a warm, welcoming atmosphere.
+  - link "123 Kurdish Way, Village City, ST 12345":
+    - /url: https://maps.google.com
+  - link "+1 (555) 123‑4567":
+    - /url: tel:+15551234567
+  - link "info@naturevillage.com":
+    - /url: mailto:info@naturevillage.com
+  - heading "Business Hours" [level=3]
+  - list:
+    - listitem: Monday - Thursday 11:00 AM - 10:00 PM
+    - listitem: Friday - Saturday 11:00 AM - 11:00 PM
+    - listitem: Sunday 12:00 PM - 9:00 PM
+  - heading "Quick Links" [level=3]
+  - navigation:
+    - link "Our Menu":
+      - /url: /menu
+    - link "Make Reservation":
+      - /url: /reservations
+    - link "Order Online":
+      - /url: /order
+    - link "About Us":
+      - /url: /about
+    - link "Gallery":
+      - /url: /gallery
+    - link "Contact":
+      - /url: /contact
+  - heading "Follow Us" [level=4]
+  - link "Facebook":
+    - /url: https://facebook.com/naturevillage
+  - link "Instagram":
+    - /url: https://instagram.com/naturevillage
+  - link "Twitter":
+    - /url: https://twitter.com/naturevillage
+  - link "Yelp":
+    - /url: https://yelp.com/biz/nature-village
+  - heading "Stay Updated" [level=3]
+  - paragraph: Subscribe for offers, events, and menu updates.
+  - textbox "Enter your email"
+  - button "Subscribe"
+  - text: © 2025 Nature Village Restaurant. All rights reserved.
+  - link "Privacy Policy":
+    - /url: /privacy
+  - link "Terms of Service":
+    - /url: /terms
+  - link "Accessibility":
+    - /url: /accessibility
+```

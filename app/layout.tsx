@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
+import SkipLink from '@/components/SkipLink';
 
 // Font configurations
 const cormorant = Cormorant_Garamond({
@@ -134,10 +135,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body className="font-body text-nv-night bg-nv-paper antialiased">
-        {/* Skip to content link for accessibility */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
+        <SkipLink />
 
         {/* Performance optimization component */}
         <PerformanceOptimizer />
@@ -146,7 +144,7 @@ export default function RootLayout({
         <NavBar />
 
         {/* Main content */}
-        <main id="main-content" className="min-h-screen">
+        <main id="main-content" className="min-h-screen" tabIndex={-1}>
           {children}
         </main>
 

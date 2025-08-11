@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
+import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact Us - Nature Village | Kurdish Restaurant Location & Hours',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+
   return (
     <div className="bg-nv-paper min-h-screen">
       {/* Hero Section */}
@@ -112,8 +114,11 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Hours & Additional Info */}
+          {/* Contact Form & Hours */}
           <div className="space-y-8">
+            {/* Contact Form */}
+            <ContactForm />
+
             {/* Hours */}
             <div className="card-elevated p-6">
               <h3 className="font-heading text-xl font-bold text-nv-night mb-4">

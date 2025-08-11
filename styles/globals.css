@@ -235,24 +235,22 @@
   }
 }
 
-/* Skip to Content */
+/* Skip link for accessibility */
 .skip-link {
   position: absolute;
-  top: -100vh;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  background: var(--nv-night);
-  color: var(--nv-paper);
-  padding: 12px 24px;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  font-weight: 600;
+  top: -40px;
+  left: 6px;
+  background: #B4532A;
+  color: white;
+  padding: 8px;
   text-decoration: none;
-  transition: top 0.2s ease-in-out;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.3s;
 }
 
 .skip-link:focus {
-  top: 0;
+  top: 6px;
 }
 
 /* Kurdish Pattern Backgrounds */

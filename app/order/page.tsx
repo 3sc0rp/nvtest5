@@ -35,7 +35,7 @@ export default function OrderPage() {
     <div className="bg-nv-paper min-h-screen">
       {/* Hero Section */}
       <Section
-        title="Order for Delivery or Pickup"
+        title="Order"
         description="Enjoy authentic Kurdish flavors at home. Order through our delivery partners or call for pickup."
         className="bg-gradient-to-br from-nv-sand to-nv-paper border-b border-nv-sand/50"
       >
@@ -81,60 +81,40 @@ export default function OrderPage() {
               </p>
               
               <div className="space-y-4">
-                {process.env.NEXT_PUBLIC_DOORDASH_URL ? (
-                  <Button
-                    as="a"
-                    href={process.env.NEXT_PUBLIC_DOORDASH_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="primary"
-                    size="lg"
-                    className="btn-hover-lift w-full"
-                    disabled={!isCurrentlyOpen}
-                  >
-                    Order on DoorDash
-                  </Button>
-                ) : (
-                  <div className="p-4 bg-nv-sand/20 rounded-lg border border-nv-sand">
-                    <p className="text-sm text-nv-olive">
-                      DoorDash integration coming soon
-                    </p>
-                  </div>
-                )}
-                
-                {process.env.NEXT_PUBLIC_UBEREATS_URL ? (
-                  <Button
-                    as="a"
-                    href={process.env.NEXT_PUBLIC_UBEREATS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="secondary"
-                    size="lg"
-                    className="btn-hover-lift w-full"
-                    disabled={!isCurrentlyOpen}
-                  >
-                    Order on Uber Eats
-                  </Button>
-                ) : (
-                  <div className="p-4 bg-nv-sand/20 rounded-lg border border-nv-sand">
-                    <p className="text-sm text-nv-olive">
-                      Uber Eats integration coming soon
-                    </p>
-                  </div>
-                )}
-                
-                {/* Fallback option */}
-                {!process.env.NEXT_PUBLIC_DOORDASH_URL && !process.env.NEXT_PUBLIC_UBEREATS_URL && (
-                  <Button
-                    as="a"
-                    href="tel:+15551234567"
-                    variant="primary"
-                    size="lg"
-                    className="btn-hover-lift w-full"
-                  >
-                    Call to Order
-                  </Button>
-                )}
+                <Button
+                  as="a"
+                  href={process.env.NEXT_PUBLIC_DOORDASH_URL || 'https://www.doordash.com/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  size="lg"
+                  className="btn-hover-lift w-full min-h-[48px]"
+                >
+                  Order on DoorDash
+                </Button>
+
+                <Button
+                  as="a"
+                  href={process.env.NEXT_PUBLIC_UBEREATS_URL || 'https://www.ubereats.com/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  size="lg"
+                  className="btn-hover-lift w-full min-h-[48px]"
+                >
+                  Order on Uber Eats
+                </Button>
+
+                {/* Fallback phone order always available */}
+                <Button
+                  as="a"
+                  href="tel:+15551234567"
+                  variant="ghost"
+                  size="lg"
+                  className="btn-hover-lift w-full min-h-[48px]"
+                >
+                  Call to Order
+                </Button>
               </div>
               
               <div className="mt-6 p-4 bg-nv-olive/5 rounded-lg">
@@ -175,7 +155,7 @@ export default function OrderPage() {
                   href="tel:+15551234567"
                   variant="primary"
                   size="lg"
-                  className="btn-hover-lift w-full"
+                  className="btn-hover-lift w-full min-h-[48px]"
                 >
                   Call to Order for Pickup
                 </Button>

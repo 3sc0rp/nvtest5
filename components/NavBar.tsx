@@ -8,9 +8,9 @@ import clsx from 'clsx';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Menu', href: '/menu' },
-  { name: 'Reservations', href: '/reservations' },
-  { name: 'Order', href: '/order' },
+  { name: 'Dishes', href: '/menu' },
+  { name: 'Booking', href: '/reservations' },
+  { name: 'Delivery & Pickup', href: '/order' },
   { name: 'About', href: '/about' },
   { name: 'Gallery', href: '/gallery' },
   { name: 'Contact', href: '/contact' },
@@ -44,7 +44,7 @@ export default function NavBar() {
             : 'bg-transparent py-4'
         )}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link 
@@ -141,7 +141,7 @@ export default function NavBar() {
               )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
-              aria-label="Toggle mobile menu"
+              aria-label="Menu"
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
             >
@@ -196,6 +196,7 @@ export default function NavBar() {
               exit={{ opacity: 0, y: -30, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="fixed top-20 left-4 right-4 z-40 md:hidden"
+              id="mobile-menu"
             >
               <div className="bg-surface-elevated rounded-3xl shadow-2xl border border-divider p-6 backdrop-blur-xl">
                 <nav className="space-y-2">

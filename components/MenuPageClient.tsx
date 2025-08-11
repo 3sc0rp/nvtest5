@@ -24,7 +24,7 @@ interface MenuItem {
   halal: boolean;
   prepTime: string;
   calories: number;
-  featured: boolean;
+  featured?: boolean;
 }
 
 interface Category {
@@ -48,6 +48,7 @@ export default function MenuPageClient({ items, categories }: MenuPageClientProp
   const [showSeasonal, setShowSeasonal] = useState(false);
   const [showVegetarian, setShowVegetarian] = useState(false);
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'popularity'>('popularity');
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   // Load filters from URL
   useEffect(() => {
@@ -261,6 +262,7 @@ export default function MenuPageClient({ items, categories }: MenuPageClientProp
             <button
               key={category.id}
               onClick={() => handleCategoryChange(category.id)}
+              data-testid="category-filter"
               className={clsx(
                 'px-6 py-3 rounded-xl font-medium transition-all duration-200',
                 selectedCategory === category.id
@@ -382,11 +384,31 @@ export default function MenuPageClient({ items, categories }: MenuPageClientProp
             className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {filteredItems.map((item, index) => (
-              <MenuItemCard key={item.id} item={item} index={index} />
+              <MenuItemCard key={item.id} item={item} index={index} onClick={(it) => setSelectedItem(it)} />
             ))}
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Simple Modal for item details */}
+      {selectedItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setSelectedItem(null)} />
+          <div role="dialog" aria-modal="true" data-testid="menu-item-modal" className="relative z-10 max-w-lg w-full bg-nv-paper rounded-2xl p-6 shadow-2xl border border-nv-sand">
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="font-heading text-2xl font-bold text-nv-night">{selectedItem.name.en}</h3>
+              <button aria-label="Close" className="text-nv-olive hover:text-nv-terracotta" onClick={() => setSelectedItem(null)}>
+                ✕
+              </button>
+            </div>
+            <p className="text-nv-olive mt-2">{selectedItem.description.en}</p>
+            <div className="mt-4 flex items-center justify-between">
+              <span className="price-badge">${selectedItem.price.toFixed(2)}</span>
+              <span className="text-sm text-nv-olive">{selectedItem.prepTime}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
